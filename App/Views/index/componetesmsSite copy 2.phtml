@@ -1,0 +1,20 @@
+<div class="row">
+    <?php foreach ($this->clienteData->data->data ?? [] as  $value) { ?>
+        <div class="col-lg-3 col-md-6">
+                    <a href="#" class="sigma_service border style-1 primary-bg">
+                        <div class="sigma_service-thumb">
+                            <i class="text-dark fas fa-envelope"></i>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="sigma_service-body">
+                            <h5 class="text-white"><?= $value->nomepacote ?? '' ?></h5>
+                            <small class="text-white">1SMS/<?= $value->qtduser . "Kz" ?></small><br>
+                            <small class="text-white"><?= $value->qtd_sms_user * $value->qtduser . "KZ" ?> </small><br>
+                            <small class="text-white">TOTAL: <?= $value->qtd_sms_user . "SMS" ?></small>
+                        </div>
+                    </a>
+                </div>
+    <?php } ?>
+
+</div>

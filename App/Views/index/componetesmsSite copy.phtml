@@ -1,0 +1,38 @@
+<div class="row">
+    <?php foreach ($this->clienteData->data->data ?? [] as  $value) { ?>
+        <div class="col-lg-4 col-md-6">
+            <div class="sigma_service style-2">
+                <div class="sigma_service-thumb">
+                    <img src="<?= API_URL_LOGO . "" . $_SESSION['LOGO_SISTEMA'] ?? '' ?>" alt="COMERCIAL" width="80" class="img-circle img-fluid">
+                </div>
+                <div class="sigma_service-body">
+                    <h5>
+                        <a href="donation.html"><?= $value->nomepacote ?? '' ?></b></a>
+                    </h5>
+                    <p>IDEAL: </b><?= $value->text_ideal ?? '' ?></p>
+                    <div class="sigma_service-progress">
+                        <div class="progress-content">
+
+                            <ul class="ml-4 mb-0 fa-ul text-muted">
+                                <li class="small"><span class="fa-li"><i class="fas fa-envelope"></i></span>1SMS/<?= $value->qtduser . "Kz" ?></li>
+                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>TOTAL: <?= $value->qtd_sms_user . "SMS" ?></li>
+                                <li class="small"><span class="fa-li"><i class="fas fa-money-bill"></i></span><?= $value->qtd_sms_user * $value->qtduser . "KZ" ?> </li>
+                            </ul>
+                        </div>
+                        <!--   <div class="sigma_progress">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="<?= $value->qtduser ?? 0 ?>" aria-valuemin="0" aria-valuemax="1000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/contact" class="sigma_btn-custom">
+
+                    </a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
+</div>

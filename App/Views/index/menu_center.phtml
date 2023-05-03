@@ -1,0 +1,120 @@
+<!-- Preloader Start -->
+<div class="sigma_preloader">
+    <img src="<?=API_URL_LOGO."". $_SESSION['LOGO_SISTEMA']??''?>" alt="ZUMU SMS" width="200">
+</div>
+<!-- Preloader End -->
+
+
+
+
+<div class="sigma_aside-overlay aside-trigger-right"></div>
+<!-- partial -->
+
+<!-- partial:partia/__mobile-nav.html -->
+<aside class="sigma_aside sigma_aside-left">
+
+    <a class="navbar-brand" href="/"> <img src="<?=API_URL_LOGO."". $_SESSION['LOGO_SISTEMA']??''?>" alt="ZUMU SMS"> </a>
+
+    <!-- Menu -->
+    <ul class="navbar-nav">
+        <li class="menu-item align-center col-12">
+            <div class="sigma_header-controls style-2">
+                <a href="#" class="sigma_search-trigger"> <i class="flaticon-magnifying-glass"></i> </a>
+            </div>
+        </li>
+        <li class="menu-item">
+            <a href="/">INICIO</a>
+        </li>
+        <li class="menu-item">
+            <a href="/login">ENTRAR AGORA</a>
+        </li>
+        <li class="menu-item">
+            <a href="/register">CRIAR CONTA</a>
+        </li>
+    </ul>
+
+</aside>
+
+<div class="sigma_aside-overlay aside-trigger-left"></div>
+<!-- partial -->
+<!-- partial:partia/__header.html -->
+<header class="sigma_header header-4 can-sticky header-absolute">
+
+    <!-- Top Header Start -->
+    <div class="sigma_header-top">
+        <div class="container-fluid">
+            <div class="sigma_header-top-inner">
+                <ul class="sigma_header-top-links ">
+                    <li class="menu-item "> <a class="text-white" href="tel:<?=$this->configuracao->dataEmpresa->contacto??''?>"> <i class="fal fa-phone"></i> (+244) <?= $this->configuracao->dataEmpresa->contacto ?? '' ?></a> </li>
+                    <li class="menu-item "> <a class="text-white" href="mailto:<?= $this->configuracao->dataEmpresa->email ?? '' ?>"> <i class="fal fa-envelope"></i><?= $this->configuracao->dataEmpresa->email ?? '' ?></a> </li>
+
+                    <li class="menu-item "> <a class="text-white" href="#">NIF: <?=$_SESSION['NIF_SISTEMA']?></a> </li>
+                    <li class="menu-item "> <a class="text-white" href="#">Service: <?=$_SESSION['hora_atendimento_inicio']?>H | <?=$_SESSION['hora_atendimento_termino']?>H</a> </li>
+                </ul>
+                <ul class="sigma_sm">
+                    <!-- Search End -->
+                    <li> <a class="text-white" href="https://facebook/ola.servicossoft" target="_blink"> <i class="fab fa-facebook-f"></i> </a> </li>
+                    <li> <a  class="text-white" href="https://twitter/ola.servicossoft" target="_blink"> <i class="fab fa-twitter"></i> </a> </li>
+                    <li> <a  class="text-white" href="https://linkedin/ola.servicossoft" target="_blink"> <i class="fab fa-linkedin"></i> </a> </li>
+                    <li> <a  class="text-white" href="https://instagram/ola.servicossoft" target="_blink"> <i class="fab fa-instagram"></i> </a> </li>
+                    <li> <a  class="text-white" href="https://youtube/ola.servicossoft" target="_blink"> <i class="fab fa-youtube"></i> </a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Top Header End -->
+
+    <!-- Middle Header Start -->
+    <div class="sigma_header-middle">
+        <div class="container-fluid">
+            <nav class="navbar">
+
+                <!-- Logo Start -->
+                <div class="sigma_logo-wrapper">
+                    <a class="navbar-brand" href="/">
+                        <img src="<?=API_URL_LOGO."". $_SESSION['LOGO_SISTEMA']??''?>" alt="Olá serviços" width="80">
+                    </a>
+                </div>
+                <!-- Logo End -->
+
+
+
+                <!-- Controls -->
+                <div class="sigma_header-controls style-2">
+
+                    <!-- Mobile Toggler -->
+                    <li class="aside-toggler style-2 aside-trigger-left">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </li>
+
+
+                </div>
+                <!-- Menu -->
+                <ul class="navbar-nav">
+                    <li class="menu-item">
+                        <a href="/">INICIO</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/login">ENTRAR AGORA</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/register">CRIAR CONTA</a>
+                    </li>
+
+                </ul>
+
+            </nav>
+        </div>
+    </div>
+    <!-- Middle Header End -->
+
+</header>
+<!-- partial -->

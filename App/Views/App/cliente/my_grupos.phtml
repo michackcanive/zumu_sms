@@ -1,0 +1,384 @@
+<?php include_once("menu_center.phtml"); ?>
+<!-- /.navbar -->
+<?php include_once("menu_lateral.phtml"); ?>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>CONTACTOS</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">ENVIAR SMS</a></li>
+                        <li class="breadcrumb-item active">CARTEIRA</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <div class="align-content-lg-between  animate__animated animate__bounceIn">
+        <div class="card-footer ">
+            <a class="btn btn-app bg-success " data-toggle="modal" data-target="#modal-default">
+                <i class="fas fa-plus"></i> NOVO ENVIO
+            </a>
+            <a class="btn btn-app bg-success " data-toggle="modal" data-target="#modal-import">
+                <i class="fas fa-plus"></i> IMPORTAR
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">CONTACTOS</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="contacto ...">
+                                <div class="input-group-append">
+                                    <div class="btn btn-primary">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="mailbox-controls">
+                            <!-- Check all button -->
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+
+                            </div>
+                            <!-- /.btn-group -->
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <div class="float-right">
+                                1-50/200
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <!-- /.btn-group -->
+                            </div>
+                            <!-- /.float-right -->
+                        </div>
+                        <div class="table-responsive mailbox-messages">
+                            <table id="example1" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>NOME</th>
+                                        <th>TELEFONE</th>
+                                        <th>EMAIL</th>
+                                        <th>Data</th>
+                                        <th>Acção</th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td>
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" value="" id="check1">
+                                            <label for="check1"></label>
+                                        </div>
+                                    </td>
+
+                                    <td class="mailbox-name"><a href="#">MICHAK1</a></td>
+                                    <td class="mailbox-subject"><b>923898442</b>
+                                    </td>
+                                    <td class="mailbox-subject d-none  d-lg-block "> <b>meateste@gmail.com</b>
+                                    </td>
+                                    <td class="mailbox-subject ">2023-24-02: 15:12h</td>
+                                    <td class="mailbox-subject text-center">
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" value="" id="check2">
+                                            <label for="check2"></label>
+                                        </div>
+                                    </td>
+
+                                    <td class="mailbox-name"><a href="#">MICHAK 2</a></td>
+                                    <td class="mailbox-subject"><b>923898442</b>
+                                    </td>
+                                    <td class="mailbox-subject d-none  d-lg-block "> <b>meateste@gmail.com</b>
+                                    </td>
+                                    <td class="mailbox-subject">2023-24-02: 15:12h</td>
+                                    <td class="mailbox-subject text-center">
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" value="" id="check3">
+                                            <label for="check3"></label>
+                                        </div>
+                                    </td>
+
+                                    <td class="mailbox-name"><a href="#">MICHAK 3</a></td>
+                                    <td class="mailbox-subject"><b>923898442</b>
+                                    </td>
+                                    <td class="mailbox-subject d-none  d-lg-block "> <b>meateste@gmail.com</b>
+                                    </td>
+
+                                    <td class="mailbox-subject">2023-24-02: 15:12h</td>
+                                    <td class="mailbox-subject text-center">
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!-- /.table -->
+                        </div>
+                        <!-- /.mail-box-messages -->
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer p-0">
+                        <div class="mailbox-controls">
+                            <!-- Check all button -->
+                            <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                                <i class="far fa-square"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <!-- /.btn-group -->
+                            <button type="button" class="btn btn-default btn-sm">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <div class="float-right">
+                                1-50/200
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <!-- /.btn-group -->
+                            </div>
+                            <!-- /.float-right -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+
+        <div class="modal fade" id="modal-default">
+
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h4 class="modal-title">NOVO CONTACTO</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body animate__animated animate__bounceIn">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-12 animate__animated animate__slideInLeft">
+                                <!-- jquery validation -->
+                                <div class="card card-primary">
+
+                                    <form method="post" accept="image/*" name="from_membro" class="mf_form_validate_membro ajax_submit_membro" action="/creteOperationSms" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>EMAIL DO SEU CLIENTE</label>
+                                                        <input type="email" name="email_user" id="email_user" class="form-control" placeholder="EMAIL DO SEU CLIENTE">
+                                                        <div class="input-group mb-2 form-group" id="erroemail_user_pacote">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>QUANTIA DE SMS</label>
+                                                        <input type="number" name="quantia_de_sms" id="quantia_de_sms" class="form-control" placeholder="QUANTIA DE SMS">
+                                                        <div class="input-group mb-2 form-group" id="erroquantia_de_sms_pacote">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>TIPO DE OPERAÇÃO</label>
+                                                        <select class="form-control p-2 " style="width: 100%;" name="typeopercao" id="typeopercao">
+                                                            <option selected="selected" value="">TIPO DE OPERAÇÃO</option>
+                                                            <option value="1" class="text-success">ENTRADA SMS</option>
+                                                            <option value="0" class=" text-danger">SAIDA SMS</option>
+                                                        </select>
+                                                        <div class="input-group mb-2 form-group" id="errotypeopercao_pacote">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="submit" class="btn btn-primary btn-block" id="register">ENVIAR SMS</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+
+        <div class="modal fade" id="modal-import">
+
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h4 class="modal-title">IMPORTAR CONTACTO</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body animate__animated animate__bounceIn">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-12 animate__animated animate__slideInLeft">
+                                <!-- jquery validation -->
+                                <div class="card card-primary">
+
+                                    <form method="post" accept="image/*" name="from_membro" class="mf_form_validate_membro ajax_submit_membro" action="/creteOperationSms" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>ARQUIVO .( .xslx ) <a href=" <?= API_URL ?>contacts_exemplar/<?= $_SESSION['NOME_EMAIL'] ?? '' ?>" target="_blank">Exemplar</a></label>
+                                                        <input type="file" name="file" id="file" class="form-control" placeholder="file">
+                                                        <div class="input-group mb-2 form-group" id="erroemail_user_pacote">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="submit" class="btn btn-primary btn-block" id="register">IMPORTAR</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<?php include_once("footer_info.phtml"); ?>
+
+<style>
+    .componente {
+        float: right;
+        /* faz o componente flutuar à direita */
+        clear: both;
+        /* garante que o componente não fique ao lado de outros elementos flutuantes */
+        margin-top: 10px;
+        /* define a margem superior para que o componente fique abaixo dos elementos anteriores */
+    }
+</style>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+
+
+<!-- Page specific script -->
+<script>
+    $(function() {
+        //Enable check and uncheck all functionality
+        $('.checkbox-toggle').click(function() {
+            var clicks = $(this).data('clicks')
+            if (clicks) {
+                //Uncheck all checkboxes
+                $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
+                $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
+            } else {
+                //Check all checkboxes
+                $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
+                $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
+            }
+            $(this).data('clicks', !clicks)
+        })
+
+        //Handle starring for font awesome
+        $('.mailbox-star').click(function(e) {
+            e.preventDefault()
+            //detect type
+            var $this = $(this).find('a > i')
+            var fa = $this.hasClass('fa')
+
+            //Switch states
+            if (fa) {
+                $this.toggleClass('fa-star')
+                $this.toggleClass('fa-star-o')
+            }
+        })
+    })
+</script>

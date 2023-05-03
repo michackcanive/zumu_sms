@@ -1,0 +1,151 @@
+<table id="example1" class="table table-bordered table-striped">
+    <thead>
+
+        <tr>
+            <th>PACOTE</th>
+            <th>QTD SISTEMA</th>
+            <th>QTD VENDER</th>
+            <th>QTD GANHAR</th>
+            <th>QTD SMS PADOTES</th>
+            <th>PREÇO DE COMPRA</th>
+            <th>ACÇÃO</th>
+        </tr>
+
+    </thead>
+    <tbody id="corpo_institucional">
+        <!-- for $this->category -->
+        <?php foreach ($this->clienteData->data->data ?? [] as  $value) { ?>
+            <tr>
+                <td><?= $value->nomepacote ?? '' ?></td>
+                <td><?= $this->clienteData->pacoteSistema ?? 0 ?> Kz</td>
+                <td><?= $value->qtduser . "Kz" ?></td>
+                <td><?= ($value->qtduser - $this->clienteData->pacoteSistema) . "Kz" ?></td>
+
+                <td><?= ($value->qtd_sms_user) . "SMS" ?></td>
+                <td><?= ($value->qtd_sms_user * $value->qtduser) . "Kz" ?></td>
+
+                <td>
+                    <span class=" btn-danger btn-sm" id="delete<?= $value->id ?>" onclick="deletpacotes('<?= $value->id ?>','<?= $this->authCsrf ?>')"><i class="fas fa-trash"></i></span>
+                    <button type="button" class=" btn btn-success btn-sm" data-toggle="modal" data-target="#modal-default<?= $value->id ?? '' ?>"><i class="fas fa-pen-nib"></i></button>
+                </td>
+            </tr>
+
+
+            <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+            <div class="modal fade" id="modal-default<?= $value->id ?>">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">EDITAR PACOTE </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card">
+                                <div class="card-body register-card-body">
+
+                                    <div id="messagem"></div>
+
+                                    <form method="post" accept="image/*" name="from_publicacao<?= $value->id ?>" class="mf_form_validate<?= $value->id ?> ajax_submit<?= $value->id ?>" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-12">
+                                                <div class=" form-group">
+                                                    <label>NOME DO PACOTE DE SMS</label>
+                                                    <input type="text" name="nomepacote<?= $value->id ?? '' ?>" id="nomepacote<?= $value->id ?? '' ?>" class="form-control" value="<?= $value->nomepacote ?>" placeholder="NOME DO PACOTE DE SMS">
+                                                    <div class="input-group mb-2 form-group" id="erronomepacote<?= $value->id ?? '' ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-12">
+                                                <div class=" form-group">
+                                                    <label>VALORES A REVENDER SMS, SISTEMA <label id="" class="text-success">1SMS/<?= $this->clienteData->pacoteSistema ?? 0 ?> Kz</label></label>
+                                                    <input type="number" name="qtduser<?= $value->id ?? '' ?>" id="qtduser<?= $value->id ?? '' ?>" class="form-control" value="<?= $value->qtduser ?? '' ?>" placeholder="VALORES A REVENDER A SMS EM KZ">
+                                                    <div class="input-group mb-2 form-group" id="erroqtduser<?= $value->id ?? '' ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>QUANTIDADE DE SMS <label id="pacoteqtd_sms_userr<?= $value->id ?? '' ?>" class="text-success"> 0.00 </label> Kz</label>
+                                                    <input type="number" value="<?= $value->qtd_sms_user ?? '' ?>" name="qtd_sms_user<?= $value->id ?? '' ?>" id="qtd_sms_user<?= $value->id ?? '' ?>" class="form-control" placeholder=" QUANTIDADE DE SMS">
+                                                    <div class="input-group mb-2 form-group" id="erroqtd_sms_user_pacote<?= $value->id ?? '' ?>">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>IDEAL PARA</label>
+                                                    <input type="text" name="text_ideal<?= $value->id ?? '' ?>" value="<?= $value->text_ideal ?? '' ?>" id="text_ideal<?= $value->id ?? '' ?>" class="form-control" placeholder="IDEL PARA ">
+                                                    <div class="input-group form-group" id="errotext_ideal_pacote<?= $value->id ?? '' ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="token<?= $value->id ?>" id="token<?= $value->id ?>" class="form-control" value="<?= $this->authCsrf ?>">
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <!-- /.col -->
+                                            <div class="col-4">
+                                                <button type="button" class="btn btn-primary btn-block" onclick="pacoteseditar(<?= $value->id ?>)" id="register<?= $value->id ?>">EDITAR</button>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.form-box -->
+                            </div><!-- /.card -->
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            
+
+
+        <?php } ?>
+        <!-- end for -->
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>PACOTE</th>
+            <th>QTD SISTEMA</th>
+            <th>QTD VENDER</th>
+            <th>QTD GANHAR</th>
+            <th>QTD SMS PADOTES</th>
+            <th>PREÇO DE COMPRA</th>
+            <th>ACÇÃO</th>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="float-md-right align-content-center">
+    <nav aria-label="Page navigation example" class="">
+        <ul class="pagination">
+            <?php foreach ($this->clienteData->data->links ?? [] as  $value) {
+
+                $itemarray = explode('page=', $value->url ?? '');
+                //$item = explode('=', $itemarray[1] ?? '');
+            ?>
+                <li class="page-item <?= $value->active ? 'active' : '' ?>">
+                    <a class="page-link" href="#" onclick="getSender('<?= $itemarray[1] ?? '' ?>')"><?= $value->label ?></a>
+                </li>
+            <?php } ?>
+
+
+        </ul>
+    </nav>
+</div>
+
+<input type="hidden" id="activadoSMS" value="<?= $this->clienteData->data->total ?? 0 ?>">
+<input type="hidden" id="pacoteSms" value="<?= $this->clienteData->pacoteSistema ?? '' ?>">
