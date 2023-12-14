@@ -33,7 +33,7 @@
                 text_ideal: {
                     required: "QUANTA A REVENDER"
                 }
-                
+
 
             },
         });
@@ -64,7 +64,8 @@
         var datastring = form.serialize();
 
         if (!has_errors) {
-            document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+            document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
             document.getElementById('register').disabled = true;
 
             $.ajax({
@@ -233,7 +234,8 @@ function deletpacotes(id, token) {
         showConfirmButton: false,
         timer: 3000
     });
-    document.getElementById('delete' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    document.getElementById('delete' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('delete' + id).disabled = true;
     var token = document.getElementById('token'+id).value;
 
@@ -259,7 +261,7 @@ function deletpacotes(id, token) {
             getPacotes();
             document.getElementById('delete' + id).innerHTML = 'deletar'
             document.getElementById('delete' + id).disabled = false;
-    
+
         } else {
             Toast.fire({
                 icon: 'info',
@@ -277,7 +279,8 @@ function deletpacotes(id, token) {
             title: `Acção inesperada`
         })
         console.log(data.responseText)
-        document.getElementById('delete' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('delete' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('delete' + id).disabled = false;
         document.getElementById('delete' + id).innerHTML = 'deletar'
 
@@ -297,7 +300,8 @@ function pacoteseditar(id) {
             timer: 3000
         });
 
-        document.getElementById('register' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('register' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('register' + id).disabled = true;
 
         var nomepacote = document.getElementById('nomepacote' + id).value
@@ -410,7 +414,8 @@ function activarpacoteprocess(id) {
         id_pacote: id,
     }
 
-    btnactive.innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    btnactive.innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('btnactive' + id)
 
     $.ajax({

@@ -49,6 +49,7 @@ class AuthController extends Action
                     echo $json;
                     return;
                 }
+
                 if (empty($userLogin->data)) {
                     header('Content-Type: application/json; charset=utf-8');
                     $gerador["erro"] = true;
@@ -58,20 +59,22 @@ class AuthController extends Action
                     return;
                 }
 
-
                 $user['email'] = $userLogin->data->email ?? '';
                 $user['name'] = $userLogin->data->name ?? '';
                 $user['tipo_de_conta'] = ($userLogin->data->typeUser == 'user') ? 'cliente' : 'membercliente';
                 $user['telefone_cliente'] = $userLogin->data->phone ?? '';
                 $user['id'] = $userLogin->data->id ?? '';
                 $user['is_membro_id_membro'] = $userLogin->data->is_membro ?? '';
+                $user['is_active'] = $userLogin->data->is_active ?? '';
+                $user['is_send_code']=$userLogin->is_send_code;
                 $token = $userLogin->token ?? '';
 
-                $this->intanciaSession->creteSessionUser($user['name'], $user['email'], $user['tipo_de_conta'] ?? '', $user['telefone_cliente'] ?? '', $user['id'], $user['is_membro_id_membro'] ?? '', $token);
+                $this->intanciaSession->creteSessionUser($user['name'], $user['email'], $user['tipo_de_conta'] ?? '', $user['telefone_cliente'] ?? '', $user['id'], $user['is_membro_id_membro'] ?? '', $token,$user['is_active'],$user['is_send_code']);
                 $infoUser = new InfUser();
 
                 $infoUser->setcookies('email_cook', $user['email'], 60800, '');
                 $infoUser->setcookies('name_cook', $user['name'], 60800, '');
+                $infoUser->setcookies('telefone_cook',  $user['telefone_cliente']??'', 60800, '');
 
                 header('Content-Type: application/json; charset=utf-8');
                 $gerador["erro"] = false;
@@ -83,7 +86,7 @@ class AuthController extends Action
             } else {
                 header('Content-Type: application/json; charset=utf-8');
                 $gerador["erro"] = true;
-                $gerador["mensagem"] = "Pagena expirada";
+                $gerador["mensagem"] = "Page expirada";
                 $json = json_encode($gerador);
                 echo $json;
                 return;

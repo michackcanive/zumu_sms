@@ -39,7 +39,8 @@
         var datastring = form.serialize();
 
         if (!has_errors) {
-            document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+            document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
             document.getElementById('register').disabled = true;
 
             $.ajax({
@@ -118,7 +119,8 @@ function deletaobreiro(id, token) {
         showConfirmButton: false,
         timer: 3000
     });
-    document.getElementById('delete' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    document.getElementById('delete' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('delete' + id).disabled = true;
     //var token = document.getElementById('token'+id).value;
 
@@ -159,7 +161,8 @@ function deletaobreiro(id, token) {
             icon: 'info',
             title: `Acção inesperada`
         })
-        document.getElementById('delete' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('delete' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('delete' + id).disabled = false;
         document.getElementById('delete' + id).innerHTML = '<i class="fas fa-trash"></i>'
 
@@ -175,7 +178,8 @@ function processarSender(id, token) {
         showConfirmButton: false,
         timer: 3000
     });
-    document.getElementById('process_sender' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    document.getElementById('process_sender' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('process_sender' + id).disabled = true;
     //var token = document.getElementById('token'+id).value;
 
@@ -192,7 +196,7 @@ function processarSender(id, token) {
         timeout: 40000,
 
     }).done(function (msg) {
-    
+
         if (msg.erro == false) {
             Toast.fire({
                 icon: 'success',
@@ -216,7 +220,8 @@ function processarSender(id, token) {
             icon: 'info',
             title: `Acção inesperada`
         })
-        document.getElementById('process_sender' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('process_sender' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('process_sender' + id).disabled = false;
         document.getElementById('process_sender' + id).innerHTML = '<i class="nav-icon fas fa-check"></i>'
 

@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $_SESSION['NOME_SISTEMA']??''?> | Membros</title>
-    <link href="<?=API_URL_LOGO."". $_SESSION['LOGO_SISTEMA']??''?>" rel="icon">
-    <link href="<?=API_URL_LOGO."". $_SESSION['LOGO_SISTEMA']??''?>" rel="apple-touch-icon">
-    <link rel="shortcut icon" href="<?=API_URL_LOGO."". $_SESSION['LOGO_SISTEMA']??''?>" type="image/x-icon">
+    <title><?= $_SESSION['NOME_SISTEMA'] ?? '' ?> | Grupos</title>
+    <link href="<?= API_URL_LOGO . "" . $_SESSION['LOGO_SISTEMA'] ?? '' ?>" rel="icon">
+    <link href="<?= API_URL_LOGO . "" . $_SESSION['LOGO_SISTEMA'] ?? '' ?>" rel="apple-touch-icon">
+    <link rel="shortcut icon" href="<?= API_URL_LOGO . "" . $_SESSION['LOGO_SISTEMA'] ?? '' ?>" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -28,8 +28,8 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-        <!-- Fonts -->
-        <link rel="stylesheet" href="/assets/css/card_style.css" type="text/css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="/assets/css/card_style.css" type="text/css">
 
     <!-- summernote -->
     <!-- Select2 -->
@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -52,7 +53,12 @@
         }
     </style>
     <?= $this->content() ?>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
 
+    </aside>
+    <!-- /.control-sidebar -->
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -64,7 +70,6 @@
     <!-- Bootstrap 4 -->
     <script src="<?= $this->urlcaminho ?>plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?= $this->urlcaminho ?>plugins/jquery-validation/additional-methods.min.js"></script>
-    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="plugins/toastr/toastr.min.js"></script>
 
@@ -102,7 +107,7 @@
 
     <!-- Summernote -->
     <script src="plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="dist/js/Membros.js"></script>
+    <script src="dist/js/Grupos.js"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -120,11 +125,30 @@
             //Initialize Select2 Elements
 
             $('.select2').select2()
-
-           
-
         });
+
+        function valorenveder(valueDender) {
+            const qtd_sms_user = document.getElementById('qtd_sms_user');
+            if (parseFloat(valueDender) > 0 && valueDender != '')
+                qtd_sms_user.disabled = false
+            else {
+                qtd_sms_user.value = ''
+                qtd_sms_user.disabled = true
+
+            }
+
+
+        }
+
+        function sms_nveder(valueDender) {
+            const qtd_sms_user = document.getElementById('qtd_sms_user');
+            if (floatval(valueDender) > 0)
+                qtd_sms_user.disabled = false
+        }
     </script>
+
+
+
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 <!-- inicio menu top -->
-<?php include_once("menu_center.phtml"); ?>
+<?php include_once "menu_center.phtml";?>
 <!-- /.navbar -->
-<?php include_once("menu_lateral.phtml"); ?>
+<?php include_once "menu_lateral.phtml";?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -19,7 +19,7 @@
             </div><!-- /.row -->
 
             <div class="row animate__animated animate__heartBeat">
-                <?php include_once("cardsSendSms.phtml"); ?>
+                <?php include_once "cardsSendSms.phtml";?>
             </div>
             <!-- /.card-body -->
 
@@ -64,7 +64,7 @@
                                 <div class="col-12 col-sm-12 col-md-12">
                                     <div class="input-group form-group">
 
-                                        <input type="text" name="pesquisar" id="pesquisar" value="<?= $_SESSION['pesquisar'] ?? '' ?>" onchange="getOperation()" class="form-control" placeholder="Mensagem">
+                                        <input type="text" name="pesquisar" id="pesquisar" value="<?=$_SESSION['pesquisar'] ?? ''?>" onchange="getOperation()" class="form-control" placeholder="Mensagem">
                                         <div class="input-group-append">
                                             <div class="input-group-text">
                                                 <a class="cursor-pointer" type="button" id="buscar" onclick="getOperation()">
@@ -99,9 +99,9 @@
 
             <!-- //////////////////////////////////////////// -->
 
-            <div class="modal fade" id="modal-default">
+            <div class="modal fade" id="modal-default" data-target="static">
 
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content ">
                         <div class="overlay  d-none" id="ispinnermodalsend">
                             <i class="fas fa-2x fa-sync fa-spin"></i>
@@ -115,7 +115,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <!-- left column -->
-                                <div class="col-md-12 animate__animated animate__bounceIn">
+                                <div class="col-md-12  ">
                                     <!-- jquery validation -->
                                     <div class="card card-primary">
 
@@ -123,31 +123,49 @@
                                             <div class="card-body">
                                                 <div class="row">
 
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="text-info">APLICAÇÃO DE ENVIO </label>
-                                                            <select class="form-control select2" style="width: 100%;"
-                                                                name="ID_PRODUTO" id="ID_PRODUTO">
+                                                            <select class="form-control select2" style="width: 100%;" name="id_sender" id="id_sender">
                                                                 <option selected="selected" value="">
-                                                                    SELECIONE O PRODUTO</option>
-                                                                    <?php foreach ($this->data_senderActive->data??[] as $value) { ?>
-                                                                        <option  value="<?=$value->id??''?>"><?=$value->name_sender_id??''?></option>
-                                                                        <?php } ?>
+                                                                    SELECIONE A APLICAÇÃO</option>
+                                                                <?php foreach ($this->data_senderActive->data ?? [] as $value) {?>
+                                                                    <option value="<?=$value->id ?? ''?>"><?=$value->name_sender_id ?? ''?></option>
+                                                                <?php }?>
                                                             </select>
+                                                        </div>
+                                                        <div class="input-group mb-2 form-group" id="erroid_sender">
                                                         </div>
 
                                                     </div>
 
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>ENVIO EM MASSA: ( .xslx ) <a href=" <?= API_URL ?>contacts_exemplar/<?= $_SESSION['NOME_EMAIL'] ?? '' ?>" target="_blank">Exemplar</a></label>
+                                                            <label class="text-info">TIPO DE ENVIO </label>
+                                                            <select class="form-control select2" style="width: 100%;" name="type_send" id="type_send" onchange="tipo_notificacao(this.value)">
+                                                                <option selected="selected" value="">
+                                                                    TIPO DE ENVIO</option>
+                                                                <option value="individual">Multiplos envios</option>
+                                                                <option value="Massa">Todos Contactos</option>
+                                                                <option value="Grupo">Grupos</option>
+                                                                <option value="file">Exel Contactos</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="input-group mb-2 form-group" id="erroid_sender">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-md-12 animate__animated animate__bounceIn  d-none" id="type_file">
+                                                        <div class="form-group">
+                                                            <label>ENVIO EM MASSA: ( .xslx ) <a href=" <?=API_URL?>contacts_exemplar/<?=$_SESSION['NOME_EMAIL'] ?? ''?>" target="_blank">Exemplar</a></label>
                                                             <input type="file" name="file" id="file" class="form-control" placeholder="">
                                                             <div class="input-group mb-2 form-group" id="erroarquivo_de_sms_pacote">
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12 animate__animated animate__bounceIn d-none" id="type_mult">
                                                         <div class="form-group">
                                                             <label>DESTINATARIO</label>
                                                             <input type="text" name="number_phone" id="number_phone" class="form-control" placeholder="ex: 9xxxxxxxx, 9xxxxxxxx, 9xxxxxxxx">
@@ -155,11 +173,28 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-12 animate__animated animate__bounceIn d-none" id="type_massa">
+                                                        <div class="form-group">
+                                                            <label>Total contactos</label>
+                                                            <input type="text" name="contactos" id="contactos" class="form-control" placeholder="" value="<?=$this->data_senderActive->total_contatos ?? 0?> Total de contactos" disabled>
+                                                            <div class="input-group mb-2 form-group" id="erronumber_phone">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 animate__animated animate__bounceIn d-none" id="type_group">
+                                                    <label>Selecionar Grupo</label>
+                                                        <select class="form-control select2" style="width: 100%;" name="id_grupo" id="id_grupo">
+                                                            <option selected="selected" value="">Escolher </option>
+                                                            <?php foreach ($this->data_senderActive->grupos->data ?? [] as $value_gr) {?>
+                                                                    <option value="<?=$value_gr->id ?? ''?>"><?=$value_gr->nome_grupo ?? ''?> - <?=$value_gr->total_contactos ?? 0?>(Contactos associados)</</option>
+                                                                <?php }?>
+                                                        </select>
+                                                    </div>
 
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label>CORPO DA MENSAGEM 1SMS/70 Caractres </label>
-                                                            <textarea type="text" name="message_body" id="message_body" rows="5" class="form-control" placeholder="CORPO DA MENSAGEM"  onkeyup="contactar_char_1(this.value,70)"></textarea>
+                                                            <textarea type="text" name="message_body" id="message_body" rows="5" class="form-control" placeholder="CORPO DA MENSAGEM" onkeyup="contactar_char_1(this.value,70)"></textarea>
                                                             <div class="input-group mb-2 form-group" id="erromessage_body">
                                                             </div>
                                                         </div>
@@ -168,21 +203,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="submit" class="btn btn-primary btn-block" id="register"><i class="far fa-envelope"></i> ENVIAR SMS</button>
-                                            </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+                            <button type="submit" class="btn btn-primary " id="register"><i class="far fa-envelope"></i> ENVIAR SMS</button>
+                        </div>
                                         </form>
                                     </div>
                                     <!-- /.card -->
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer justify-content-between">
 
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
-
-                        </div>
                     </div>
                     <!-- /.modal-content -->
                 </div>
@@ -193,8 +225,8 @@
     </section>
     <!-- /////////////////////////////////////////////////////////////////////////////////// -->
 </div>
-
-<?php include_once("footer_info.phtml"); ?>
+<input type="hidden" name="token" id="token" class="form-control" value="<?=$this->authCsrf?>">
+<?php include_once "footer_info.phtml";?>
 
 <script>
     if (!!(window.addEventListener)) window.addEventListener('DOMContentLoaded', main);
@@ -205,9 +237,37 @@
             $('body').addClass('dark-mode')
         }
         getOperation();
-
-        //
     }
+
+    function tipo_notificacao(tipoValue) {
+        if (tipoValue == 'individual') {
+            $('#type_mult').removeClass('d-none')
+            $('#type_massa').addClass('d-none')
+            $('#type_file').addClass('d-none')
+            $('#type_group').addClass('d-none')
+        } else if(tipoValue == 'Grupo') {
+            $('#type_group').removeClass('d-none')
+            $('#type_massa').addClass('d-none')
+            $('#type_file').addClass('d-none')
+            $('#type_mult').addClass('d-none')
+        }else if(tipoValue == 'Massa') {
+            $('#type_massa').removeClass('d-none')
+            $('#type_group').addClass('d-none')
+            $('#type_file').addClass('d-none')
+            $('#type_mult').addClass('d-none')
+        }else if(tipoValue == 'file') {
+            $('#type_file').removeClass('d-none')
+            $('#type_group').addClass('d-none')
+            $('#type_massa').addClass('d-none')
+            $('#type_mult').addClass('d-none')
+        }else if(tipoValue == '') {
+            $('#type_file').addClass('d-none')
+            $('#type_group').addClass('d-none')
+            $('#type_massa').addClass('d-none')
+            $('#type_mult').addClass('d-none')
+        }
+    }
+
 </script>
 
 <!-- Control Sidebar -->

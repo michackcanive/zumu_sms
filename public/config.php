@@ -2,15 +2,15 @@
 
 define(
     "API_URL",
-    'http://127.0.0.1:8000/api/'
+    'http://127.0.0.1:8088/api/'
 );
 define(
     "API_URL_ONLINE",
-    'http://127.0.0.1:8000/api/'
+    'http://127.0.0.1:8088/api/'
 );
 define(
     "API_URL_LOGO",
-    'http://127.0.0.1:8000/'
+    'http://127.0.0.1:8088/'
 );
 define(
     "EMAIL_EMPRESA",

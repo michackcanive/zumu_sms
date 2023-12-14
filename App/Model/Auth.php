@@ -20,7 +20,18 @@ class Auth extends ServicesAuth
     }
     public function upatepassword($password, $id_usuario): bool
     {
-
         return boolval(1);
+    }
+    public function active_account($code,$token_jwt)
+    {
+        //activeAccount
+        return $this->activeAccount($code,$token_jwt);
+
+    }
+    public function renviar_codigo_active($token_jwt)
+    {
+        //activeAccount
+        return $this->renviar_codigo($token_jwt);
+
     }
 }

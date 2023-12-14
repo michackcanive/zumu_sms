@@ -66,11 +66,12 @@ class SendSmsController extends Action
     public function sendOperationSms()
     {
         $dataCliente = array(
-            "type_send" => 'individual',
+            "type_send" => trim(strip_tags($_POST['type_send'] ?? '')),
             "id_sender" => trim(strip_tags($_POST['id_sender'] ?? '')),
             "message_body" => trim(strip_tags($_POST['message_body'] ?? '')),
             "file" => $_FILES['file'] ?? null,
-            "number_phone" => trim(strip_tags($_POST['number_phone'] ?? ''))
+            "number_phone" => trim(strip_tags($_POST['number_phone'] ?? '')),
+            "id_grupo" => trim(strip_tags($_POST['id_grupo'] ?? ''))
         );
 
         $is_date_obr = $this->instaciaSendRepositorio->SendsmsSms($_SESSION['tokenjwt'], $dataCliente);
@@ -83,6 +84,7 @@ class SendSmsController extends Action
                 $response["message_body"] = $is_date_obr->errorInfo->message_body ?? '';
                 $response["id_sender"] = $is_date_obr->errorInfo->id_sender ?? '';
                 $response["type_send"] = $is_date_obr->errorInfo->type_send ?? '';
+                $response["id_grupo"] = $is_date_obr->errorInfo->id_grupo ?? '';
                 $response["number_phone"] = $is_date_obr->errorInfo->number_phone ?? '';
                 $json = json_encode($response);
                 echo $json;
@@ -90,8 +92,8 @@ class SendSmsController extends Action
             }
 
             header('Content-Type: application/json; charset=utf-8');
-            $response["erro"] = $is_date_obr->error;
-            $response["mensagem"] =  $is_date_obr->status;
+            $response["erro"] = $is_date_obr->error??true;
+            $response["mensagem"] =  $is_date_obr->status??'Não foi possivel enviar';
             $json = json_encode($response);
             echo $json;
             return;

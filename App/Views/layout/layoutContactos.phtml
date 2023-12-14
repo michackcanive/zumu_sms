@@ -70,7 +70,6 @@
     <!-- Bootstrap 4 -->
     <script src="<?= $this->urlcaminho ?>plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?= $this->urlcaminho ?>plugins/jquery-validation/additional-methods.min.js"></script>
-    <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="plugins/toastr/toastr.min.js"></script>
 
@@ -108,7 +107,7 @@
 
     <!-- Summernote -->
     <script src="plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="dist/js/Pacotes.js"></script>
+    <script src="dist/js/Contactos.js"></script>
     <!-- overlayScrollbars -->
     <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -126,25 +125,6 @@
             //Initialize Select2 Elements
 
             $('.select2').select2()
-
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "searching": false,
-                "info": true,
-                "paging": false,
-                "buttons": ["csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
         });
 
         function valorenveder(valueDender) {
@@ -167,39 +147,7 @@
         }
     </script>
 
-        <!-- Page specific script -->
-        <script>
-        $(function() {
-            //Enable check and uncheck all functionality
-            $('.checkbox-toggle').click(function() {
-                var clicks = $(this).data('clicks')
-                if (clicks) {
-                    //Uncheck all checkboxes
-                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
-                    $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
-                } else {
-                    //Check all checkboxes
-                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
-                    $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
-                }
-                $(this).data('clicks', !clicks)
-            })
 
-            //Handle starring for font awesome
-            $('.mailbox-star').click(function(e) {
-                e.preventDefault()
-                //detect type
-                var $this = $(this).find('a > i')
-                var fa = $this.hasClass('fa')
-
-                //Switch states
-                if (fa) {
-                    $this.toggleClass('fa-star')
-                    $this.toggleClass('fa-star-o')
-                }
-            })
-        })
-    </script>
 
 </body>
 

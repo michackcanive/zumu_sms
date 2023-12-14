@@ -64,7 +64,8 @@ function forgnewpar() {
     var datastring = form.serialize();
 
     if (!has_errors) {
-        document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('register').disabled = true;
         new_code = document.getElementById('new_code').value;
         token = document.getElementById('token').value;
@@ -188,7 +189,8 @@ function forgconfirme() {
     var datastring = form.serialize();
 
     if (!has_errors) {
-        document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('register').disabled = true;
         my_code = document.getElementById('my_code').value;
         token = document.getElementById('token').value;
@@ -328,7 +330,8 @@ function forgpassword() {
     var datastring = form.serialize();
 
     if (!has_errors) {
-        document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('register').disabled = true;
         my_email = document.getElementById('my_email').value;
         token = document.getElementById('token').value;

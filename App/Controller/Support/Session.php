@@ -24,7 +24,7 @@ class Session
      *
      * @return string
      */
-    public function createCsrf():string
+    public function createCsrf(): string
     {
         return $_SESSION['csrf_token'] = base64_encode(random_bytes(20));
     }
@@ -45,21 +45,24 @@ class Session
         return false;
     }
 
-    public function creteSessionUser($nameUser, $emailUser, $tipoDeConta,$telefone,$idUser,$is_membro_id_membro,$token)
+    public function creteSessionUser($nameUser, $emailUser, $tipoDeConta, $telefone, $idUser, $is_membro_id_membro, $token, $is_active,$is_send_code)
     {
         $_SESSION['nameUser'] = $nameUser;
-        $_SESSION['emailUser'] = $emailUser??'';
+        $_SESSION['emailUser'] = $emailUser ?? '';
         $_SESSION['tipo_de_conta'] = $tipoDeConta;
         $_SESSION['idUser'] = $idUser;
-        $_SESSION['telefone'] = $telefone??'';
-        $_SESSION['tokenjwt'] = $token??'';
-        $_SESSION['is_membro_id_membro'] = $is_membro_id_membro??'';
+        $_SESSION['telefone'] = $telefone ?? '';
+        $_SESSION['tokenjwt'] = $token ?? '';
+        $_SESSION['is_membro_id_membro'] = $is_membro_id_membro ?? '';
+        $_SESSION['is_active'] = $is_active ?? 0;
+        $_SESSION['is_send_code']=$is_send_code?? 0;
+
     }
 
     public function is_authetication()
     {
+
         if (!empty($_SESSION['idUser'])) {
-            // 
             header('Location:/dashboard');
         }
     }
@@ -68,6 +71,9 @@ class Session
     {
         if (empty($_SESSION['idUser'])) {
             header('Location:/login');
+        }
+        if (!$_SESSION['is_active']) {
+            header('Location:/active_account');
         }
     }
 }

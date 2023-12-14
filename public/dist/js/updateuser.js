@@ -63,7 +63,8 @@ function submitupadate(data) {
         return
 
 
-    document.getElementById('btn-update_user').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    document.getElementById('btn-update_user').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('btn-update_user').disabled = true;
 
 
@@ -105,7 +106,7 @@ function submitupadate(data) {
             }
         },
         error: function (e) {
-           
+
             document.getElementById('btn-update_user').innerHTML = `<button type="submit" class="btn btn-danger" id="btn-update_user-senha">Submit</button>`;
             document.getElementById('btn-update_user').disabled = false;
             Toast.fire({
@@ -184,7 +185,8 @@ function submitupadate_senha(data) {
     if (!input)
     return
 
-    document.getElementById('btn-update_user-senha').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    document.getElementById('btn-update_user-senha').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('btn-update_user-senha').disabled = true;
 
 

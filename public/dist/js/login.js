@@ -43,7 +43,8 @@ $(function () {
 function submitLogin() {
 
 
-    document.getElementById('login').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    document.getElementById('login').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('login').disabled = true;
 
     let token = document.getElementById('token').value

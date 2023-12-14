@@ -46,7 +46,7 @@ abstract class GetRegisterSendSms
                     'type_send' => $dataCliente['type_send'],
                     'number_phone' => $dataCliente['number_phone'] ?? '',
                     'message_body' => $dataCliente['message_body'] ?? '',
-                    'file' => new CURLFile($caminho_temporario, $nome_arquivo),
+                    'exelContact' => new CURLFile($caminho_temporario, $nome_arquivo),
                     'token' => $token
                 ];
 

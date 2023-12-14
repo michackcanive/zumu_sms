@@ -54,7 +54,8 @@
         var datastring = form.serialize();
 
         if (!has_errors) {
-            document.getElementById('createpedido').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+            document.getElementById('createpedido').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
             document.getElementById('createpedido').disabled = true;
 
             $.ajax({
@@ -202,6 +203,7 @@ function activarpacoteprocess(id) {
             icon: 'info',
             title: `FORNEÇA A SUA SENHA`
         })
+        return
     }
 
     dados = {
@@ -210,8 +212,10 @@ function activarpacoteprocess(id) {
         password: password
     }
 
-    btnactivemodel.innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
-    btnactivemodel.innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    btnactivemodel.innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
+    btnactivemodel.innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('btnactive' + id)
     document.getElementById('btnactivemodel' + id)
 

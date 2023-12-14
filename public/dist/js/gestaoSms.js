@@ -61,7 +61,8 @@
         var datastring = form.serialize();
 
         if (!has_errors) {
-            document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+            document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
             document.getElementById('register').disabled = true;
 
             $.ajax({
@@ -155,8 +156,8 @@ function getOperation(page) {
         <div class="spinner-border text-primary" style="width: 50px; height: 50px;" role="status">
             <span class="visually-hidden"></span>
         </div>
-    </div>
-</div>`
+     </div>
+    </div>`
     let pesquisar = document.getElementById('pesquisar').value
     var token = document.querySelector('#token').value;
     document.getElementById('buscar').disabled = true;

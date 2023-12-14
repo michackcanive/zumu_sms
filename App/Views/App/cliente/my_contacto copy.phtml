@@ -9,11 +9,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Meus Grupos</h1>
+                    <h1>CONTACTOS</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/my_send_sms">ENVIAR SMS</a></li>
+                        <li class="breadcrumb-item"><a href="#">ENVIAR SMS</a></li>
                         <li class="breadcrumb-item active">CARTEIRA</li>
                     </ol>
                 </div>
@@ -24,7 +24,13 @@
     <div class="align-content-lg-between  animate__animated animate__bounceIn">
         <div class="card-footer ">
             <a class="btn btn-app bg-success " data-toggle="modal" data-target="#modal-default">
-                <i class="fas fa-plus"></i> NOVO
+                <i class="fas fa-plus"></i> NOVO 
+            </a>
+            <a class="btn btn-app bg-success " data-toggle="modal" data-target="#modal-import">
+                <i class="fas fa-plus"></i> IMPORTAR
+            </a>
+            <a class="btn btn-app bg-success " href=" <?= API_URL ?>exportarContactosExcel?token=<?= $_SESSION['tokenjwt'] ?? '' ?>">
+                <i class="fas fa-plus"></i> EXPORTAR
             </a>
         </div>
     </div>
@@ -36,13 +42,13 @@
             <div class="col-md-12">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">MEUS GRUPOS</h3>
+                        <h3 class="card-title">CONTACTOS</h3>
 
                         <div class="card-tools">
                             <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" name="pesquisar" id="pesquisar" value="<?= $_SESSION['pesquisar'] ?? '' ?>" onchange="getGrupo()" placeholder="contacto ...">
+                                <input type="text" class="form-control" name="pesquisar" id="pesquisar" value="<?= $_SESSION['pesquisar'] ?? '' ?>" onchange="getContacto()" placeholder="contacto ...">
                                 <div class="input-group-append">
-                                    <div class="btn btn-primary"  type="button" id="buscar" onclick="getGrupo()">
+                                    <div class="btn btn-primary"  type="button" id="buscar" onclick="getContacto()">
                                         <i class="fas fa-search"></i>
                                     </div>
                                 </div>
@@ -55,7 +61,7 @@
 
                         <div class="table-responsive mailbox-messages">
                             <div class="card-body">
-                                <div id='grupos'>
+                                <div id='contactos'>
                                     <div class="d-flex justify-content-center">
                                         <div class="spinner-border text-primary" style="width: 50px; height: 50px;" role="status">
                                             <span class="visually-hidden"></span>
@@ -80,7 +86,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content ">
                     <div class="modal-header">
-                        <h4 class="modal-title">NOVO GRUPO</h4>
+                        <h4 class="modal-title">NOVO CONTACTO</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -92,30 +98,39 @@
                                 <!-- jquery validation -->
                                 <div class="card card-primary">
 
-                                    <form method="post" accept="image/*" name="from_membro" class="mf_form_validate_grupo ajax_submit_grupo" action="/createGrupo" enctype="multipart/form-data">
+                                    <form method="post" accept="image/*" name="from_membro" class="mf_form_validate_contacto ajax_submit_contacto" action="/createContacto" enctype="multipart/form-data">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>NOME GRUPO</label>
-                                                        <input type="text" name="nome_grupo" id="nome_grupo" class="form-control" placeholder="NOVO GRUPO">
+                                                        <label>NOME CONTACTO</label>
+                                                        <input type="text" name="nome_contacto" id="nome_contacto" class="form-control" placeholder="NOVO CONTACTO">
                                                         <div class="input-group mb-2 form-group" id="erronome">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>NOME GRUPO</label>
-                                                        <textarea name="descricao" id="descricao" cols="10" rows="5" class="form-control" placeholder="descrição"></textarea>
-                                                        <div class="input-group mb-2 form-group" id="erronome">
+                                                        <label>TELEFONE</label>
+                                                        <input type="number" name="telefone" id="telefone" class="form-control" placeholder="TELEFONE">
+                                                        <div class="input-group mb-2 form-group" id="errotelefone">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>EMAIL DO SEU CLIENTE</label>
+                                                        <input type="email" name="email_contacto" id="email_contacto" class="form-control" placeholder="EMAIL DO SEU CLIENTE">
+                                                        <div class="input-group mb-2 form-group" id="erroemail_contacto">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
                                         <div class="modal-footer justify-content-between">
-                                            <button type="submit" class="btn btn-primary btn-block" id="register">GRAVAR</button>
+                                            <button type="submit" class="btn btn-primary btn-block" id="register">EDITAR</button>
                                         </div>
                                     </form>
                                 </div>
@@ -134,7 +149,57 @@
             <!-- /.modal-dialog -->
         </div>
 
+        <div class="modal fade" id="modal-import">
 
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h4 class="modal-title">IMPORTAR CONTACTO</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body animate__animated animate__bounceIn">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-12 animate__animated animate__slideInLeft">
+                                <!-- jquery validation -->
+                                <div class="card card-primary">
+
+                                    <form method="post" accept="image/*" name="from_membro" class="mf_form_validate_import ajax_submit_import" action="/importarContacto" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>ARQUIVO .( .xslx ) <a href=" <?= API_URL ?>contacts_exemplar/<?= $_SESSION['NOME_EMAIL'] ?? '' ?>" target="_blank">Exemplar</a></label>
+                                                        <input type="file" name="file" id="file" class="form-control" placeholder="file">
+                                                        <div class="input-group mb-2 form-group" id="errofile">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="submit" class="btn btn-primary btn-block" id="register_Import">IMPORTAR</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.row -->
     </section>
     <!-- /.content -->
 </div>
@@ -199,7 +264,7 @@
                 }
             })
         })
-        getGrupo();
+        getContacto();
 
     }
 </script>

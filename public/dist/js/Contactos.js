@@ -2,16 +2,13 @@
 
     "use strict";
 
-    $("form.mf_form_validate_membro").each(function () {
+    $("form.mf_form_validate_contacto").each(function () {
         $(this).validate({
             rules: {
-                nome_membro: {
+                nome_contacto: {
                     required: true,
                 },
-                email_membro: {
-                    required: true
-                },
-                password: {
+                email_contacto: {
                     required: true
                 },
                 telefone: {
@@ -20,14 +17,11 @@
                 }
             },
             messages: {
-                nome_membro: {
-                    required: "NOME DO MEMBRO "
+                nome_contacto: {
+                    required: "NOME DO CONCTATO "
                 },
-                email_membro: {
-                    required: "EMAIL DO MEMBRO"
-                },
-                password: {
-                    required: "SENHA DE ACESSO"
+                email_contacto: {
+                    required: "EMAIL DO CONCTATO"
                 },
                 telefone: {
                     required: "Informe o telemove",
@@ -37,7 +31,7 @@
         });
     });
 
-    $("form.ajax_submit_membro").on('submit', function (e) {
+    $("form.ajax_submit_contacto").on('submit', function (e) {
         e.preventDefault();
 
         var Toast = Swal.mixin({
@@ -66,6 +60,7 @@
     <span class="visually-hidden"></span>`;
             document.getElementById('register').disabled = true;
 
+
             $.ajax({
                 url: form.attr('action'),
                 method: 'POST',
@@ -80,18 +75,15 @@
                 success: function (data) {
 
                     if (data.erro === true) {
-
                         console.log(data)
                         Toast.fire({
                             icon: 'info',
                             title: `${data.mensagem} `
                         })
-
-                        if (Boolean(data.email_membro)) {
-                            document.getElementById('erroemail_membro').innerHTML = `<span  class="text-danger" d-block >${data.email_membro}</span> `
-
+                        if (Boolean(data.email_contacto)) {
+                            document.getElementById('erroemail_contacto').innerHTML = `<span  class="text-danger" d-block >${data.email_contacto}</span> `
                         } else {
-                            document.getElementById('erroemail_membro').innerHTML = ``
+                            document.getElementById('erroemail_contacto').innerHTML = ``
                         }
 
                         if (Boolean(data.telefone)) {
@@ -99,10 +91,10 @@
                         } else {
                             document.getElementById('errotelefone').innerHTML = ``
                         }
-                        if (Boolean(data.password)) {
-                            document.getElementById('erropassword').innerHTML = `<span  class="text-danger" d-block >${data.password}</span> `
+                        if (Boolean(data.nome)) {
+                            document.getElementById('erronome').innerHTML = `<span  class="text-danger" d-block >${data.nome}</span> `
                         } else {
-                            document.getElementById('erropassword').innerHTML = ``
+                            document.getElementById('erronome').innerHTML = ``
                         }
 
                         document.getElementById('register').innerHTML = `Enviar`;
@@ -112,11 +104,12 @@
                     if (data.erro === false) {
                         console.log(data)
                         $('#modal-default').modal('hide')
-                        sucessoCarregdo('Criação de membro')
-                        document.getElementById('register').innerHTML = `Enviar`;
+                        sucessoCarregdo('Criação de contacto')
+                        document.getElementById('register').innerHTML = `Gravar`;
                         document.getElementById('register').disabled = false;
-                        getMember()
+
                         form.trigger("reset");
+                        getContacto()
                     }
                 },
 
@@ -127,8 +120,119 @@
                         icon: 'warnnig',
                         title: `${data.responseText} `
                     })
-                    document.getElementById('register').innerHTML = `Enviar`;
+                    document.getElementById('register').innerHTML = `Gravar`;
                     document.getElementById('register').disabled = false;
+                }
+            });
+        }
+        return false;
+    });
+})(jQuery);
+
+
+
+(function ($) {
+
+    "use strict";
+
+    $("form.mf_form_validate_import").each(function () {
+        $(this).validate({
+            rules: {
+                file: {
+                    required: true,
+                }
+            },
+            messages: {
+                file: {
+                    required: "forneça um arquivo valido "
+                }
+            },
+        });
+    });
+
+    $("form.ajax_submit_import").on('submit', function (e) {
+        e.preventDefault();
+
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
+        var has_errors = false,
+            form = $(this),
+            form_fields = form.find('input'),
+
+            server_result_display = form.find('.server_response');
+
+        form_fields.each(function () {
+            if ($(this).hasClass('error')) {
+                has_errors = true;
+            }
+        });
+
+        var datastring = form.serialize();
+
+        if (!has_errors) {
+            document.getElementById('register_Import').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
+            document.getElementById('register_Import').disabled = true;
+
+
+            $.ajax({
+                url: form.attr('action'),
+                method: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function () {
+                    //moveupdate(valouePropostaBanner,id);
+                    //$('#msg').html('Loading......');
+                },
+                success: function (data) {
+
+
+                    if (data.erro === true) {
+                        console.log(data)
+                        Toast.fire({
+                            icon: 'info',
+                            title: `${data.mensagem} `
+                        })
+                        if (Boolean(data.file)) {
+                            document.getElementById('errofile').innerHTML = `<span  class="text-danger" d-block >${data.file}</span> `
+                        } else {
+                            document.getElementById('errofile').innerHTML = ``
+                        }
+
+
+                        document.getElementById('register_Import').innerHTML = `Importar`;
+                        document.getElementById('register_Import').disabled = false;
+                        return;
+                    }
+                    if (data.erro === false) {
+                        console.log(data)
+                        $('#modal-default').modal('hide')
+                        sucessoCarregdo('Contactos Importadados')
+                        document.getElementById('register_Import').innerHTML = `Importar`;
+                        document.getElementById('register_Import').disabled = false;
+
+                        form.trigger("reset");
+                        getContacto()
+                    }
+                },
+
+
+                error: function (data) {
+
+                    console.log(data.responseText)
+                    Toast.fire({
+                        icon: 'warnnig',
+                        title: `${data.responseText} `
+                    })
+                    document.getElementById('register_Import').innerHTML = `Importar`;
+                    document.getElementById('register_Import').disabled = false;
                 }
             });
         }
@@ -155,7 +259,7 @@ function errorActivete(tipo_de_activacao) {
 
 
 
-function deletamembro(id, token) {
+function deletaContacto(id, token) {
     var Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -220,7 +324,7 @@ function deletamembro(id, token) {
 }
 
 
-function membroeditar(id) {
+function Contactoeditar(id) {
     $(document).ready(function () {
 
         var Toast = Swal.mixin({
@@ -230,31 +334,29 @@ function membroeditar(id) {
             timer: 3000
         });
 
-        document.getElementById('register' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+        document.getElementById('Editar' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
     <span class="visually-hidden"></span>`;
-        document.getElementById('register' + id).disabled = true;
+        document.getElementById('Editar' + id).disabled = true;
 
-        var nome_membro = document.getElementById('nome_membro' + id).value
-        var email_membro = document.getElementById('email_membro' + id).value
-        var senha_membro = document.getElementById('password' + id).value
-        var telefone_cliente = document.getElementById('telefone' + id).value
+        var telefone = document.getElementById('telefone' + id).value
+        var email_contacto = document.getElementById('email_contacto' + id).value
+        var nome_contacto = document.getElementById('nome_contacto' + id).value
 
         var token = document.getElementById('token' + id).value
 
 
         var form_data = new FormData();
 
-        form_data.append("email_membro", email_membro);
-        form_data.append("password", senha_membro);
-        form_data.append("user_id", id);
-        form_data.append("nome_membro", nome_membro);
+        form_data.append("email_contacto", email_contacto);
+        form_data.append("id_contacto", id);
+        form_data.append("nome_contacto", nome_contacto);
         form_data.append("token", token);
-        form_data.append("telefone", telefone_cliente);
+        form_data.append("telefone", telefone);
 
 
 
         $.ajax({
-            url: "/cretemember",
+            url: "/createContacto",
             type: "POST",
             data: form_data,
             contentType: false,
@@ -272,35 +374,32 @@ function membroeditar(id) {
                         title: `${data.mensagem} `
                     })
                     //setTimeout(function () { window.location.reload(); }, 2000);
-                    $('#modal-default' + id).modal('hide')
-                    getMember()
+                    $('#modal-edit' + id).modal('hide')
+                    getContacto()
 
                 }
                 else {
-
                     Toast.fire({
                         icon: 'info',
                         title: `${data.mensagem}`
                     })
-                    document.getElementById('register' + id).innerHTML = `EDITAR`;
-                    document.getElementById('register' + id).disabled = false;
+                    document.getElementById('Editar' + id).innerHTML = `EDITAR`;
+                    document.getElementById('Editar' + id).disabled = false;
 
-                    if (Boolean(data.email_membro)) {
-                        document.getElementById('erroemail_membro' + id).innerHTML = `<span  class="text-danger" d-block >${data.email_membro}</span> `
-
+                    if (Boolean(data.email)) {
+                        document.getElementById('erroemail_contacto' + id).innerHTML = `<span  class="text-danger" d-block >${data.email}</span> `
                     } else {
-                        document.getElementById('erroemail_membro' + id).innerHTML = ``
+                        document.getElementById('erroemail_contacto' + id).innerHTML = ``
                     }
-
-                    if (Boolean(data.telefone)) {
-                        document.getElementById('errotelefone' + id).innerHTML = `<span  class="text-danger" d-block >${data.telefone}</span> `
+                    if (Boolean(data.numero_telefone)) {
+                        document.getElementById('errotelefone' + id).innerHTML = `<span  class="text-danger" d-block >${data.numero_telefone}</span> `
                     } else {
                         document.getElementById('errotelefone' + id).innerHTML = ``
                     }
-                    if (Boolean(data.password)) {
-                        document.getElementById('erropassword' + id).innerHTML = `<span  class="text-danger" d-block >${data.password}</span> `
+                    if (Boolean(data.nome)) {
+                        document.getElementById('erronome' + id).innerHTML = `<span  class="text-danger" d-block >${data.nome}</span> `
                     } else {
-                        document.getElementById('erropassword' + id).innerHTML = ``
+                        document.getElementById('erronome' + id).innerHTML = ``
                     }
 
                 }
@@ -318,9 +417,9 @@ function membroeditar(id) {
     });
 }
 
-function getMember(page) {
+function getContacto(page) {
 
-    document.getElementById('member').innerHTML = `<div id='member' class="text-center">
+    document.getElementById('contactos').innerHTML = `<div id='contactos' class="text-center">
     <div class="d-flex justify-content-center">
         <div class="spinner-border text-primary" style="width: 50px; height: 50px;" role="status">
             <span class="visually-hidden"></span>
@@ -336,30 +435,27 @@ function getMember(page) {
         pesquisar: pesquisar ?? ''
     }
     $.ajax({
-        url: '/getMember',
+        url: '/getContactos',
         type: 'post',
         data: dados,
         timeout: 40000,
 
     }).done(function (msg) {
-        console.log(msg)
-        if(Boolean(msg.erro)){
 
+        if (Boolean(msg.erro)) {
             errorActivete('verifica a sua ligação')
-            document.getElementById('member').innerHTML = ''
+            document.getElementById('contactos').innerHTML = ''
             document.getElementById('buscar').disabled = false;
             document.getElementById('activeValue').innerHTML = `0`
             return;
         }
-        document.getElementById('member').innerHTML = msg
-        let activeValue = document.getElementById('activado').value
-        document.getElementById('activeValue').innerHTML = `${activeValue}`
+        document.getElementById('contactos').innerHTML = msg
         reniciarTabela()
         document.getElementById('buscar').disabled = false;
     }).fail(function (data) {
         errorActivete('Não foi possível obter os dados')
         document.getElementById('buscar').disabled = false;
-        console.log(data.responseText)
+        //console.log(data.responseText)
     })
 }
 
@@ -375,5 +471,15 @@ function reniciarTabela() {
         "autoWidth": false,
         "buttons": ["csv", "excel", "pdf", "print"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+}
+
+function selecionados() {
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+    var values = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+        values.push(checkboxes[i].value);
+    }
+    console.log(values);
 
 }

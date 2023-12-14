@@ -48,6 +48,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['name'])) {
         case '/register':
             Route::setRoute("/register", "IndexController-register");
             break;
+        case '/confimarCode':
+            Route::setRoute("/confimarCode", "CreteUserController-confimarCode");
+            break;
+        case '/renviar_codigo':
+            Route::setRoute("/renviar_codigo", "CreteUserController-renviar_codigo");
+            break;
 
         case '/requestnewpassword':
             Route::setRoute("/requestnewpassword", "ForgotPasswordController-requestnewpassword");
@@ -86,6 +92,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['name'])) {
         case '/creteuser':
             Route::setRoute("/creteuser", "CreteUserController-creteuser");
             break;
+        case '/active_account':
+            Route::setRoute("/active_account", "CreteUserController-active_account");
+            break;
 
             ////////////////////////////////////////
         case '/authuser':
@@ -104,9 +113,34 @@ if (isset($_SESSION['id']) && isset($_SESSION['name'])) {
         case '/my_contacto':
             Route::setRoute("/my_contacto", "ContactoController-my_contacto");
             break;
-        case '/grupos':
-            Route::setRoute("/my_contacto", "ContactoController-my_contacto");
+        case '/createContacto':
+            Route::setRoute("/createContacto", "ContactoController-createContacto");
             break;
+        case '/importarContacto':
+            Route::setRoute("/importarContacto", "ContactoController-importarContacto");
+            break;
+        case '/getContactos':
+            Route::setRoute("/getContactos", "ContactoController-getContactos");
+            break;
+
+
+            ///////GRUPOS//////////////////////////////////
+        case '/my_grupos':
+            Route::setRoute("/my_grupos", "GruposController-my_grupos");
+            break;
+        case '/add_contact':
+            Route::setRoute("/add_contact", "GruposController-add_contact");
+            break;
+        case '/createGrupo':
+            Route::setRoute("/createGrupo", "GruposController-createGrupo");
+            break;
+        case '/getGrupos':
+            Route::setRoute("/getGrupos", "GruposController-getGrupos");
+            break;
+
+
+
+
             //////////////////////////////////////////////////////
 
 

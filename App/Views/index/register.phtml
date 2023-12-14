@@ -82,7 +82,7 @@
                     <div class="form-group mb-0">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
-                            <label class="custom-control-label" for="exampleCheck1">Eu aceito <a href="#breve">termos de serviço.</a>.</label>
+                            <label class="custom-control-label" for="exampleCheck1">Eu aceito <a href="#" data-toggle="modal" data-target="#modal-termos">termos de serviço.</a>.</label>
                         </div>
                     </div>
 
@@ -105,6 +105,51 @@
                     Registrar com Google+
                 </a> -->
             </div>
+            <div class="modal fade" id="modal-termos">
+
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Termos de serviço.</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body animate__animated animate__bounceIn">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-12 animate__animated animate__slideInLeft">
+                                    <!-- jquery validation -->
+                                    <div class="card card-primary">
+
+                                        <form method="post" accept="image/*" name="from_membro" class="mf_form_validate_contacto ajax_submit_contacto" action="/createContacto" enctype="multipart/form-data">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                    <p class="text-danger">Aceito todos os termos aplicado ao serviços</p>
+                                                    <p>O processo de alteração de telemovel ou email tem custos</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
 
             <a href="/login" class="text-center">Já tenho conta</a>
         </div>

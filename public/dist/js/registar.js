@@ -94,7 +94,8 @@ $(function () {
 
 function submitCreateUser() {
 
-    document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+    document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
     document.getElementById('register').disabled = true;
 
     let name = document.getElementById('name').value
@@ -141,7 +142,7 @@ function submitCreateUser() {
             window.location.href = '/dashboard';
 
         } else {
-         
+
             document.getElementById('messagem').innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <span class="alert-text">${msg.mensagem}</span>
                 </div>`

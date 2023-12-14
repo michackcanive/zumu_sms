@@ -40,14 +40,7 @@ class PacotesController extends Action
         $data = $this->instaciamembrosRepositorio->findPacotesms($_SESSION['tokenjwt'], $_SESSION['page']);
         //$data = $this->instaciamembrosRepositorio->findPacotesms($_SESSION['tokenjwt'], $_SESSION['page']);
         $this->clienteData = $data ?? [];
-        //pacoteSistema
-        if (empty($this->clienteData)) {
-            header('Content-Type: application/json; charset=utf-8');
-            $response["erro"] =  true;
-            $json = json_encode($response);
-            echo $json;
-            return;
-        }
+
         $this->render("componentPacotes", "layoutPacotes");
     }
     public function cretepacotes()
@@ -88,7 +81,7 @@ class PacotesController extends Action
         $id_pacote = trim(strip_tags($_POST['id_pacote']));
         if ($this->newcreateCsrf->csrf_verifica($token)) {
             $data = $this->instaciamembrosRepositorio->deletePacotesSmsCliente($_SESSION['tokenjwt'], $id_pacote);
-            
+
             if (!empty($data)) {
                 header('Content-Type: application/json; charset=utf-8');
                 $response["erro"] = $data->error;

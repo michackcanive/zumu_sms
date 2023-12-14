@@ -54,6 +54,39 @@ abstract class Auth implements IRequest
             return [];
         }
     }
+    public function activeAccount($code,$token_jwt)
+    {
+        $estruturaJson = '
+        {
+          "code" : "' . $code . '",
+          "token" : "' . $token_jwt . '"
+        }';
+        try {
+            $infor = json_decode($this->estruturaJson($estruturaJson, $this->URL . "activeAccount"));
+
+            if (!empty($infor)) {
+                return $infor;
+            } else {
+                return [];
+            }
+            return [];
+        } catch (Exception $error) {
+            return [];
+        }
+    }
+
+    public function renviar_codigo($token_jwt)
+    {
+        try {
+            $infor = json_decode($this->estruturaJsonGet($this->URL . "renviar_codigo_activa?token=".$token_jwt));
+            return $infor;
+        } catch (Exception $e) {
+            return array(
+                'error' => true,
+                'mensager' => $e
+            );
+        }
+    }
 
     public function estruturaJson($estruturaJson, $url): string
     {
@@ -63,6 +96,17 @@ abstract class Auth implements IRequest
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $estruturaJson);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $response;
+    }
+    public function estruturaJsonGet($url): string
+    {
+        // $fields = urlencode($estruturaJson);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         $response = curl_exec($ch);
         curl_close($ch);

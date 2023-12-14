@@ -1,0 +1,155 @@
+<div class="mailbox-controls">
+    <!-- Check all button -->
+    <button type="button" class="btn btn-default btn-sm checkbox-toggle" ><i class="far fa-square"></i>
+    </button>
+    <div class="btn-group">
+        <button type="button" class="btn btn-default btn-sm" onclick="selecionados()">
+            <i class="far fa-trash-alt"></i>
+        </button>
+
+    </div>
+    <!-- /.btn-group -->
+    <button type="button" class="btn btn-default btn-sm" onclick="getGrupo()">
+        <i class="fas fa-sync-alt"></i>
+    </button>
+
+    <!-- /.float-right -->
+</div>
+
+<table id="example1" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>NOME</th>
+            <th>TOTAL CONTACTOS</th>
+            <th>DESCRIÇAÕ</th>
+            <th>Data</th>
+            <th>Acção</th>
+        </tr>
+    </thead>
+    <?php foreach ($this->clienteData->data->data ?? [] as  $value) { ?>
+        <tr>
+            <td>
+                <div class="icheck-primary">
+                    <input type="checkbox" value="<?= $value->id ?>" id="check<?= $value->id ?>">
+                    <label for="check<?= $value->id ?>"></label>
+                </div>
+            </td>
+
+            <td class="mailbox-name"><a href="#"><?= $value->nome_grupo ?></a></td>
+            <td class="mailbox-subject"><b><?= $value->total_contactos??0 ?></b>
+            </td>
+            <td class="mailbox-subject d-none  d-lg-block "> <b><?= substr($value->descricao??'',0,8) ?></b>
+            </td>
+            <td class="mailbox-subject "><?= $value->created_at ?? '' ?></td>
+            <td class="mailbox-subject text-center">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-edit<?= $value->id ?>">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+                <a type="button" href="add_contact?id_grupo=<?= $value->id ?>" class="btn btn-default btn-sm" >
+                    <i class="fas fa-plus"></i>
+                </a>
+            </td>
+
+        </tr>
+
+        <div class="modal fade" id="modal-edit<?= $value->id ?>">
+
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h4 class="modal-title">EDITAR GRUPO</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body animate__animated animate__bounceIn">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-md-12 animate__animated animate__slideInLeft">
+                                <!-- jquery validation -->
+                                <div class="card card-primary">
+
+                                    <form method="post" accept="image/*" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>NOME GRUPO</label>
+                                                        <input type="text" name="nome_grupo<?= $value->id ?>" id="nome_grupo<?= $value->id ?>" class="form-control" value="<?= $value->nome ?? '' ?>" placeholder="NOME CONTACTO">
+                                                        <div class="input-group mb-2 form-group" id="erronome<?= $value->id ?>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="token<?= $value->id ?>" id="token<?= $value->id ?>" class="form-control" value="<?= $this->authCsrf ?>">
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="submit" class="btn btn-primary btn-block" id="Editar<?= $value->id ?>" onclick="Grupoeditar(<?= $value->id ?>)" >Editar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    <?php } ?>
+    </tbody>
+</table>
+<!-- /.table -->
+<div class="card-footer p-0">
+    <div class="mailbox-controls">
+        <!-- Check all button -->
+        <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+            <i class="far fa-square"></i>
+        </button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm">
+                <i class="far fa-trash-alt"></i>
+            </button>
+        </div>
+        <!-- /.btn-group -->
+        <button type="button" class="btn btn-default btn-sm" onclick="getContacto()">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+        <div class="float-right">
+            <?= $this->clienteData->data->from??0 ?>-<?= $this->clienteData->data->to??0 ?>/<?= $this->clienteData->data->total??0 ?>
+
+            <?php foreach ($this->clienteData->data->links ?? [] as  $value) {
+
+                $itemarray = explode('page=', $value->url ?? '');
+                //$item = explode('=', $itemarray[1] ?? '');
+            ?>
+                <div class="btn-group">
+                    <!--<button type="button" class="btn btn-default btn-sm" onclick="getOperation('<?= $itemarray[1] ?? '' ?>')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button> -->
+                    <button type="button" class="btn btn-sm <?= $value->active ? 'btn-primary' : 'btn-default' ?> " onclick="getContacto('<?= $itemarray[1] ?? '' ?>')">
+                        <?= $value->label ?>
+                    </button>
+                    <!--<button type="button" class="btn btn-default btn-sm">
+                        <i class="fas fa-chevron-right"></i>
+                    </button> -->
+                </div>
+            <?php } ?>
+            <!-- /.btn-group -->
+        </div>
+        <!-- /.float-right -->
+    </div>
+</div>
+
+
+
+

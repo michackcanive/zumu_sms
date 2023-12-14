@@ -87,7 +87,8 @@
         var datastring = form.serialize();
 
         if (!has_errors) {
-            document.getElementById('button').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+            document.getElementById('button').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
             document.getElementById('button').disabled = true;
             $.ajax({
                 type: "POST",
@@ -212,7 +213,8 @@
         var datastring = form.serialize();
 
         if (!has_errors) {
-            document.getElementById('button').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+            document.getElementById('button').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
             document.getElementById('button').disabled = true;
             $.ajax({
                 type: "POST",
@@ -269,7 +271,8 @@ function enviarEmail(id, id_igreja) {
             timer: 3000
         });
 
-        document.getElementById('enviaremail' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('enviaremail' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('enviaremail' + id).disabled = true;
 
         var nome_membro = document.getElementById('nome_membro' + id).value

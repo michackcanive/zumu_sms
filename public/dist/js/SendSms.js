@@ -11,6 +11,9 @@
                 message_body: {
                     required: true
                 },
+                type_send: {
+                    required: true,
+                },
                 number_phone: {
                     required: false,
                 }
@@ -21,6 +24,9 @@
                 },
                 message_body: {
                     required: "Infome o corpo da mensagem"
+                },
+                type_send: {
+                    required: "Forneça o tipo de envio"
                 },
                 number_phone: {
                     required: "Cliente destinatario"
@@ -66,13 +72,61 @@
 
         var datastring = form.serialize();
 
+        let tipoValue = document.getElementById('type_send').value
+
+        if (tipoValue == 'individual') {
+            let number_phone = document.getElementById('number_phone').value
+            if(number_phone==''){
+                Toast.fire({
+                    icon: 'warning',
+                    title: `Forneça o contactos ... `
+                })
+                return;
+            }
+        } else if(tipoValue == 'Grupo') {
+            let id_grupo = document.getElementById('id_grupo').value
+
+            if(id_grupo==''){
+                Toast.fire({
+                    icon: 'warning',
+                    title: `Forneça o grupo `
+                })
+                return;
+            }
+        }else if(tipoValue == 'Massa') {
+            let contactos = document.getElementById('contactos').value
+            if(contactos==0){
+                Toast.fire({
+                    icon: 'warning',
+                    title: `Sem contacto cadastrado `
+                })
+                return;
+            }
+        }else if(tipoValue == 'file') {
+            let type_file = document.getElementById('type_file').value
+            if(type_file==''){
+                Toast.fire({
+                    icon: 'warning',
+                    title: `Forneça o arquivo `
+                })
+                return;
+            }
+        }else if(tipoValue == '') {
+
+            Toast.fire({
+                icon: 'warning',
+                title: `Forneça um tipo de envio `
+            })
+            return;
+        }
+
         if (!has_errors) {
             // ispinnermodalsend
             //  d-none
 
-
             $('#ispinnermodalsend').removeClass('d-none')
-            document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+            document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
             document.getElementById('register').disabled = true;
 
             $.ajax({
@@ -223,7 +277,7 @@ var frase = "Esta é uma frase com palavras acentuadas.";
 var regex = /[áàâãéèêíïóôõöúç]/i;
 
 /*if (regex.test(frase)) {
-    
+
   console.log("A frase contém palavras com acentuação.");
 } else {
   console.log("A frase não contém palavras com acentuação.");

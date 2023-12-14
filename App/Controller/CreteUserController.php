@@ -17,10 +17,12 @@ class CreteUserController extends Action
 {
     private $intanciaSession;
     private $configuracao;
+    private $newcreateCsrf;
+    public $authCsrf;
     public function __construct()
     {
         $this->intanciaSession = new Session();
-        //
+        $this->newcreateCsrf = new Session();
         $instacia = new Site();
         $this->configuracao = $instacia->findConfigSite(EMAIL_EMPRESA);
     }
@@ -92,6 +94,9 @@ class CreteUserController extends Action
                     $user['id'] = $userLogin->user->id ?? '';
                     $user['is_membro_id_membro'] = $userLogin->user->is_membro ?? '';
                     $token = $userLogin->token ?? '';
+                    $user['is_active']=$userLogin->user->is_active ?? '';;
+                    $user['is_send_code']=$userLogin->user->is_send_code ?? '';;
+
                 }
             } else {
                 header('Content-Type: application/json; charset=utf-8');
@@ -105,11 +110,12 @@ class CreteUserController extends Action
 
             if (!$userLogin->error) {
 
-                $this->intanciaSession->creteSessionUser($user['name'], $user['email'], $user['tipo_de_conta'], $user['telefone_cliente'] ?? '', $user['id'], $user['is_membro_id_membro'], $token);
+                $this->intanciaSession->creteSessionUser($user['name'], $user['email'], $user['tipo_de_conta'], $user['telefone_cliente'] ?? '', $user['id'], $user['is_membro_id_membro'], $token, $user['is_active'],$user['is_send_code']);
                 $infoUser = new InfUser();
 
                 $infoUser->setcookies('email_cook', $user['email'], 60800, '');
                 $infoUser->setcookies('name_cook', $user['name'], 60800, '');
+                $infoUser->setcookies('telefone_cook',  $user['telefone_cliente'] ?? '', 60800, '');
                 $insteciaEmail = new SendEmail();
                 $corpocliente = $this->corpo('Obrigado por se cadastrar na plataforma <b>' . $_SESSION['NOME_SISTEMA'] . '</b>, <br>
                 A ' . $_SESSION['NOME_SISTEMA'] . ' visa oferecer diversas linhas de serviços e produtos aos utilizadores,
@@ -143,11 +149,104 @@ class CreteUserController extends Action
         }
     }
 
+    public function active_account()
+    {
+        $this->authCsrf = $this->newcreateCsrf->createCsrf();
+        // enviar codigo
+
+        $this->render("active_account", "layout_login");
+    }
+    public function confimarCode()
+    {
+        $token = $_POST['token'];
+        $codeConfimar = trim(strip_tags($_POST['codeConfimar'] ?? ''));
+        if ($this->intanciaSession->csrf_verifica($token)) {
+            //active_account
+            $authUser = new Auth();
+            $useractive = $authUser->active_account($codeConfimar,$_SESSION['tokenjwt']);
+
+            if (!empty($useractive)) {
+
+                if ($useractive->error) {
+                    $error['code'] =  $useractive->errorInfo->code ?? '';
+                    $error["erro"] = true;
+                    $error["mensagem"] = $useractive->status ?? '';
+                    $json = json_encode($error);
+                    echo $json;
+                    return;
+                } else {
+                    header('Content-Type: application/json; charset=utf-8');
+                    $error["erro"] = false;
+                    $_SESSION['is_active'] = 1;
+                    $error["mensagem"] = $useractive->status ?? '';
+                    $json = json_encode($error);
+                    echo $json;
+                    return;
+                }
+            } else {
+                header('Content-Type: application/json; charset=utf-8');
+                $gerador["erro"] = true;
+                $gerador["mensagem"] = 'Não foi possivel activar a conta';
+                $json = json_encode($gerador);
+                echo $json;
+                return;
+            }
+        } else {
+            header('Content-Type: application/json; charset=utf-8');
+            $gerador["erro"] = true;
+            $gerador["mensagem"] = "page expirada";
+            $json = json_encode($gerador);
+            echo $json;
+            return;
+        }
+    }
+
+    public function renviar_codigo()
+    {
+
+        $token = $_POST['token']??'';
+        if ($this->intanciaSession->csrf_verifica($token)) {
+            //active_account
+            $authUser = new Auth();
+            $useractive = $authUser->renviar_codigo_active($_SESSION['tokenjwt']);
+
+
+            if (!empty($useractive)) {
+
+                if ($useractive->error) {
+                    $error["erro"] = true;
+                    $error["mensagem"] =  $useractive->status ?? 'conexão lenta';
+                    $json = json_encode($error);
+                    echo $json;
+                    return;
+                } else {
+                    $error["erro"] = false;
+                    $error["mensagem"] = $useractive->status ?? '';
+                    $json = json_encode($error);
+                    echo $json;
+                    return;
+                }
+            } else {
+                header('Content-Type: application/json; charset=utf-8');
+                $gerador["erro"] = true;
+                $gerador["mensagem"] = 'Não foi possivel activar a conta';
+                $json = json_encode($gerador);
+                echo $json;
+                return;
+            }
+        } else {
+            header('Content-Type: application/json; charset=utf-8');
+            $gerador["erro"] = true;
+            $gerador["mensagem"] = "page expirada";
+            $json = json_encode($gerador);
+            echo $json;
+            return;
+        }
+    }
 
 
     private function corpo($textoCorpo, $nome_pessoa, $Assunto)
     {
         return $corpo = '';
-  
     }
 }

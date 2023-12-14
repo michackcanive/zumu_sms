@@ -98,7 +98,7 @@
                     required: "Forneça suas IBAN ",
                 }
 
-                
+
 
             },
         });
@@ -137,7 +137,8 @@
         var datastring = form.serialize();
 
         if (!has_errors) {
-            document.getElementById('register').innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+            document.getElementById('register').innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
             document.getElementById('register').disabled = true;
 
             $.ajax({
@@ -223,7 +224,8 @@ function configeditar(id, id_igreja) {
             timer: 3000
         });
 
-        document.getElementById('register' + id).innerHTML = `<div class="spinner-grow" role="status"><span class="sr-only">Loading...</span></div>`;
+        document.getElementById('register' + id).innerHTML = `<div class="spinner-border text-dark" style="width: 18px; height: 18px;" role="status">
+    <span class="visually-hidden"></span>`;
         document.getElementById('register' + id).disabled = true;
 
         var nome_obreiro = document.getElementById('nome_obreiro' + id).value
