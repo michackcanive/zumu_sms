@@ -61,9 +61,7 @@ class Session
 
         if (!empty($_SESSION['idUser'])) {
             header('Location:/dashboard');
-        } else {
-            header('Location:/login');
-        }
+        } 
     }
 
     public function is_autheticationNot()
