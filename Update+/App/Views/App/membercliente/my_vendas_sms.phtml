@@ -1,0 +1,131 @@
+<?php include_once("menu_center.phtml"); ?>
+<!-- /.navbar -->
+<?php include_once("menu_lateral.phtml"); ?>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">MINHAS COMPRAS</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">INICIO</a></li>
+                        <li class="breadcrumb-item active"><a href="/my_solitation_card">CARREGAR CONTA</a></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+            <div class="row animate__animated animate__heartBeat">
+                <?php include_once("cardsVendaSms.phtml"); ?>
+            </div>
+            <!-- /.card-body -->
+
+           <!--  <div class="align-content-lg-between animate__animated animate__bounceIn">
+                <div class="card-footer ">
+                    <a class="btn btn-app bg-success componente" data-toggle="modal" data-target="#modal-default">
+                        <i class="fas fa-plus"></i> NEW SEND
+                    </a>
+                </div>
+            </div> -->
+
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="card  card-primary card-outline">
+                        <div class="card-header">
+
+                            <h3 class="card-title">
+
+                                <i class="far fa-chart-bar"></i>
+                                MOVIMENTOS DE MENSAGENS
+                            </h3>
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+
+                                <i class="fas fa-minus"></i>
+
+                            </button>
+
+                            <div class="card-tools">
+
+                                <div class="col-12 col-sm-12 col-md-12">
+                                    <div class="input-group form-group">
+
+                                        <input type="text" name="pesquisar" id="pesquisar" value="<?= $_SESSION['pesquisar'] ?? '' ?>" onchange="getOperationvenda()" class="form-control" placeholder="Nome Cliente">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <a class=" cursor-pointer" type="button" id="buscar" onclick="getOperationvenda()">
+                                                    <span class="fas fa-search"></span>
+                                                </a>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div id='Operation'>
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border text-primary" style="width: 50px; height: 50px;" role="status">
+                                        <span class="visually-hidden"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  {{ $dados['data']->links('vendor.pagination.bootstrap-5') }}-->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
+    <!-- /.content -->
+</div>
+
+<?php include_once("footer_info.phtml"); ?>
+
+<style>
+    .componente {
+        float: right;
+        /* faz o componente flutuar à direita */
+        clear: both;
+        /* garante que o componente não fique ao lado de outros elementos flutuantes */
+        margin-top: 10px;
+        /* define a margem superior para que o componente fique abaixo dos elementos anteriores */
+    }
+</style>
+
+
+<script>
+    if (!!(window.addEventListener)) window.addEventListener('DOMContentLoaded', main);
+    else window.attachEvent('onload', main);
+
+    function main() {
+        if (localStorage.getItem("theme") == 1) {
+            $('body').addClass('dark-mode')
+        }
+        getOperationvenda();
+    }
+</script>

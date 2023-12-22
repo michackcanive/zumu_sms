@@ -1,0 +1,47 @@
+<div class="row no-gutters">
+    <?php
+    foreach ($this->clienteData->data->data ?? [] as $key => $value) { ?>
+        <?php if ($key == 0) {
+        ?>
+            <div class="col-lg-4 box" data-aos="zoom-in">
+                <h3><?= $value->nomepacote ?? '' ?></h3>
+                <h4><?= $value->qtd_sms_user * $value->qtduser . "KZ" ?><span></span></h4>
+                <ul>
+                    <li class="text-center"> <i class="bx bx-check"></i> 1SMS/<?= $value->qtduser . "Kz" ?> </li>
+                    <li class="text-center"><i class="bx bx-check"></i><?= $value->qtd_sms_user . "SMS" ?></li>
+                    <li class="text-center"><i class="bx bx-check"></i><?= $value->text_ideal??'' ?></li>
+       
+                </ul>
+                <a href="#" class="get-started-btn">Login</a>
+            </div>
+        <?php }
+        if ($key == 1) { ?>
+
+            <div class="col-lg-4 box featured" data-aos="zoom-in">
+                <span class="featured-badge">Pacote</span>
+                <h3><?= $value->nomepacote ?? '' ?></h3>
+                <h4><?= $value->qtd_sms_user * $value->qtduser . "KZ" ?><span></span></h4>
+                <ul> 
+                    <li class="text-center"><i class="bx bx-check"></i>  1SMS/<?= $value->qtduser . "Kz" ?></li>
+                    <li class="text-center"><i class="bx bx-check"></i> <?= $value->qtd_sms_user . "SMS" ?></li>
+                    <li class="text-center"><i class="bx bx-check"></i><?= $value->text_ideal??'' ?></li>
+                </ul>
+                <a href="#" class="get-started-btn">Login</a>
+            </div>
+
+        <?php }
+        if ($key == 2) { ?>
+            <div class="col-lg-4 box" data-aos="zoom-in">
+                <h3><?= $value->nomepacote ?? '' ?></h3>
+                <h4><?= $value->qtd_sms_user * $value->qtduser . "KZ" ?><span></span></h4>
+                <ul>
+                    <li class="text-center"><i class="bx bx-check"></i> <?= $value->qtd_sms_user . "SMS" ?></li>
+                    <li class="text-center"><i class="bx bx-check"></i>  1SMS/<?= $value->qtduser . "Kz" ?></li>
+                    <li class="text-center"><i class="bx bx-check"></i><?= $value->text_ideal??'' ?></li>
+                </ul>
+                <a href="#" class="get-started-btn">Login</a>
+            </div>
+        <?php     } ?>
+    <?php
+    }  ?>
+</div>

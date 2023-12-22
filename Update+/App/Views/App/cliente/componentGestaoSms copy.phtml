@@ -1,0 +1,63 @@
+<table id="example1" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Sender ID</th>
+            <th>user</th>
+            <th>Estado</th>
+            <th>Data</th>
+            <th>Acção</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- for $this->category -->
+        <?php foreach ($this->senderData->data->data ?? [] as  $value) { ?>
+            <tr>
+                <td><?= $value->name_sender_id ?? '' ?></td>
+                <td> <?= $value->name ?? '' ?></td>
+                <td> <?= $value->status_action ? '<span class="text-success" > ACTIVADO</span>' : '<span class="text-danger" >PENDENTE</span> ' ?></td>
+                <td><?= $value->created_at ?? '' ?></td>
+                <td class=" text-center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success btn-flat "> Acção </button>
+                        <button type="button" class="btn btn-success btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                            <span class="sr-only"></span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" id="delete<?= $value->id ?>" onclick="deletaobreiro('<?= $value->id ?? '' ?>','<?= $this->authCsrf ?>')">DELETAR</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <?php } ?>
+        <!-- end for -->
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Sender ID</th>
+            <th>user</th>
+            <th>Estado</th>
+            <th>Data</th>
+            <th>Acção</th>
+        </tr>
+    </tfoot>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <?php foreach ($this->senderData->data->links ?? [] as  $value) {
+
+            $itemarray = explode('?', $value->url ?? '');
+            $item = explode('=', $itemarray[1] ?? '');
+        ?>
+            <li class="page-item <?= $value->active ? 'active' : '' ?>">
+                <a class="page-link" href="#" onclick="getSender('<?= $item[1] ?? '' ?>')"><?= $value->label ?></a>
+            </li>
+        <?php } ?>
+
+    </ul>
+</nav>
+<!-- <input type="hidden" id="activadoSMS" value="<?= $this->clienteData->data->total ?? 0 ?>"> -->
+<input type="hidden" id="activadoSMS" value="<?= $this->clienteData->activadoSsms ?? 0 ?>">
+<input type="hidden" id="restantesSMS" value="<?= $this->clienteData->restantesSms ?? '0' ?>">

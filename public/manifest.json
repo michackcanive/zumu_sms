@@ -1,0 +1,22 @@
+{
+    "name": "SMS +",
+    "short_name": "SMS +",
+    "start_url": "/login",
+    "display": "standalone",
+    "background_color": "#565869",
+    "theme_color": "#3498db",
+    "icons": [
+        {
+            "src": "./send.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./send.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "description": "Este é o meu aplicativo web",
+    "lang": "pt-BR"
+}

@@ -1,0 +1,42 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <!-- inicio menu top -->
+    <?php include_once("menu_center.phtml"); ?>
+    <!-- /.navbar -->
+    <?php include_once("menu_lateral.phtml"); ?>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row">
+                <div class="col-sm-12">
+                        <h4 class="m-0">CONTA COM ANOMALIA CONTACTOR : <?=$this->usuario_principal['email']??''?></h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="main-footer">
+    © zumu_sms.
+            <a href="https://zumu_sms.com">zumu_sms</a>.- Desenvolvido pela <a href="https://qlerius.com" class="text-dark">Qlerius</a> </strong>
+        <div class="float-right d-none d-sm-inline-block">
+           Suporte: <?=$this->configuracoes['contactos']?>---<b>Version</b> 3.2.0
+        </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->

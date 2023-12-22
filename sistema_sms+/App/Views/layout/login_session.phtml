@@ -1,0 +1,46 @@
+    <!--modal transferencia -->
+    <div class="modal fade" id="login_session" tabindex="-1" role="dialog" aria-labelledby="transferencia" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document" style="border-radius:20px;">
+            <div class="modal-content bg-transparent">
+                <div class="modal-body p-0">
+                    <div class="card border-0 mb-0" id="confirmacao_cdg">
+                        <div class="card-header bg-transparent">
+                            <div class="text-muted text-center h2 mb-2 mt-4">
+                                <small class="fs-1">Para acessar determinadas partes do Painel, confirme sua credencial.</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <form role="form" action="#" name="from_session">
+                                <div class="mb-3">
+
+
+                                    <input type="number" class="form-control form-control-lg" name="email_ou_numero" minlength="9" required maxlength="9" onkeyup="somenteNumeros(this);" id="email_ou_numero" onkeyup="habilita_Btn()" placeholder="Telefone (9XX XXX XXX)">
+                                    <?php if (isset($this->numeroerro)) { ?>
+                                        <small class=" alert-danger   col-lg-12 "> <strong><?= $this->numeroerro ?? '' ?></strong></small>
+                                    <?php } ?>
+
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control form-control-lg" name="senha" onkeyup="habilita_Btn_senha()" id="senha" placeholder="Senha" required>
+                                </div>
+                                <div class="mb-3">
+                                    <button id="avancar" type="submit" disabled="disabled" class="btn btn-lg btn-primary  btn-lg w-100 mt-4 mb-0">
+
+                                        Actualizar
+
+                                    </button>
+                                </div>
+                                <input type="hidden" class="form-control" name="csrf" id="floatingPassword" value="<?= $this->csrf_input() ?? "" ?>">
+                                <div class="mb-3">
+                                    <div id="messagem">
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

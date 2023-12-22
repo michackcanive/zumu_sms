@@ -1,0 +1,120 @@
+<table id="example1" class="table table-bordered table-striped">
+    <thead>
+
+        <tr>
+            <th>APLICATIVO</th>
+            <th>TIPO DE ENVIO</th>
+            <th>DESTINATÁRIO</th>
+            <th>TOTAL SMS</th>
+            <th>CORPO</th>
+            <th>DATA</th>
+            <th>ACÇÃO</th>
+        </tr>
+
+    </thead>
+    <tbody id="corpo_institucional">
+        <!-- for $this->category -->
+        <?php foreach ($this->clienteData->data->data ?? [] as  $value) { ?>
+            <tr>
+                <td><?= $value->name_sender_id ?? '' ?></td>
+                <td><?= $value->typesend ?? '' ?></td>
+                <td><?= $value->number_phone ?? '' ?></td>
+                <td><?= $value->amount_send ?? '' ?></td>
+                <td><?= substr($value->descricao_sms, 0, 50) ?></td>
+                <td><?= $value->created_at ?? '' ?></td>
+                <td>
+                    <button type="button" class=" btn btn-success btn-sm" data-toggle="modal" data-target="#modal-default<?= $value->id ?? '' ?>"><i class="fas fa-envelope-open"></i></button>
+                </td>
+            </tr>
+
+            <div class="modal fade" id="modal-default<?= $value->id ?>">
+
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <h4 class="modal-title">CORPO DA MENSAGEM</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-12 animate__animated animate__slideInLeft">
+                                    <!-- jquery validation -->
+                                    <div class="card card-primary">
+                                        <form>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>MENSAGEM</label>
+                                                            <textarea name="textsend" class="form-control"  id="" cols="30" rows="10"><?= $value->descricao_sms??'' ?></textarea>
+                                                            <div class="input-group mb-2 form-group" id="errotypeopercao_pacote">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+        <?php } ?>
+        <!-- end for -->
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>APLICATIVO</th>
+            <th>TIPO DE ENVIO</th>
+            <th>DESTINATÁRIO</th>
+            <th>TOTAL SMS</th>
+            <th>CORPO</th>
+            <th>DATA</th>
+            <th>ACÇÃO</th>
+        </tr>
+    </tfoot>
+</table>
+<div class="float-md-right align-content-center">
+    <nav aria-label="Page navigation example" class="">
+        <ul class="pagination">
+            <?php foreach ($this->clienteData->data->links ?? [] as  $value) {
+
+                $itemarray = explode('page=', $value->url ?? '');
+                //$item = explode('=', $itemarray[1] ?? '');
+            ?>
+                <li class="page-item <?= $value->active ? 'active' : '' ?>">
+                    <a class="page-link" href="#" onclick="getOperation('<?= $itemarray[1] ?? '' ?>')"><?= $value->label ?></a>
+                </li>
+            <?php } ?>
+
+
+        </ul>
+    </nav>
+</div>
+
+
+<!-- <input type="hidden" id="activadoSMS" value="<?= $this->clienteData->data->total ?? 0 ?>"> -->
+<input type="hidden" id="activadoSMS" value="<?= $this->clienteData->activadoSsms ?? 0 ?>">
+<input type="hidden" id="restantesSMS" value="<?= $this->clienteData->restantesSms ?? '0' ?>">
+
+
+<script>
+    function sender(msg) {
+
+    }
+</script>

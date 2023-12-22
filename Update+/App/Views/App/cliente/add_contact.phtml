@@ -1,0 +1,173 @@
+<?php include_once("menu_center.phtml"); ?>
+<!-- /.navbar -->
+<?php include_once("menu_lateral.phtml"); ?>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Associar contactos</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/my_send_sms">ENVIAR SMS</a></li>
+                        <li class="breadcrumb-item active">CARTEIRA</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Associar</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" name="pesquisar" id="pesquisar" value="<?= $_SESSION['pesquisar'] ?? '' ?>" onchange="getGrupo()" placeholder="contacto ...">
+                                <div class="input-group-append">
+                                    <div class="btn btn-primary" type="button" id="buscar" onclick="getGrupo()">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+
+
+                        <div class="row">
+
+                            <div class="col-lg-6 col-md-12">
+
+                                <div class="table-responsive mailbox-messages">
+                                    <div class="card-body">
+                                    <div class="col-12">
+                                    <h3 class="card-title">associado</h3>
+                                    </div>
+
+                                        <div id='grupos'>
+                                            <div class="d-flex justify-content-center">
+                                                <div class="spinner-border text-primary" style="width: 30px; height: 30px;" role="status">
+                                                    <span class="visually-hidden"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  {{ $dados['data']->links('vendor.pagination.bootstrap-5') }}-->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+
+                                <div class="table-responsive mailbox-messages">
+                                    <div class="card-body">
+                                    <h3 class="card-title">Associar</h3>
+                                        <div id='grupos'>
+                                            <div class="d-flex justify-content-center">
+                                                <div class="spinner-border text-primary" style="width: 30px; height: 30px;" role="status">
+                                                    <span class="visually-hidden"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  {{ $dados['data']->links('vendor.pagination.bootstrap-5') }}-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- /.mail-box-messages -->
+                    </div>
+                    <!-- /.card-body -->
+
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<?php include_once("footer_info.phtml"); ?>
+
+<style>
+    .componente {
+        float: right;
+        /* faz o componente flutuar à direita */
+        clear: both;
+        /* garante que o componente não fique ao lado de outros elementos flutuantes */
+        margin-top: 10px;
+        /* define a margem superior para que o componente fique abaixo dos elementos anteriores */
+    }
+</style>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+
+
+<script>
+    if (!!(window.addEventListener)) window.addEventListener('DOMContentLoaded', main);
+    else window.attachEvent('onload', main);
+
+    function main() {
+        if (localStorage.getItem("theme") == 1) {
+            $('body').addClass('dark-mode')
+        }
+        $(function() {
+            //Enable check and uncheck all functionality
+            $('.checkbox-toggle').click(function() {
+                var clicks = $(this).data('clicks')
+                if (clicks) {
+                    //Uncheck all checkboxes
+                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
+                    $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
+                } else {
+                    //Check all checkboxes
+                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
+                    $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
+                }
+                $(this).data('clicks', !clicks)
+            })
+
+            //Handle starring for font awesome
+            $('.mailbox-star').click(function(e) {
+                e.preventDefault()
+                //detect type
+                var $this = $(this).find('a > i')
+                var fa = $this.hasClass('fa')
+
+                //Switch states
+                if (fa) {
+                    $this.toggleClass('fa-star')
+                    $this.toggleClass('fa-star-o')
+                }
+            })
+        })
+
+
+    }
+</script>
+
+<!-- Page specific script -->
+<script>
+
+</script>

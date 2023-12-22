@@ -1,0 +1,73 @@
+<table id="example1" class="table table-bordered table-hover">
+    <thead>
+
+        <tr>
+            <th>USER</th>
+            <th>TELEFONE</th>
+            <th>EMAIL</th>
+            <th>AKZ </th>
+            <th>COMPROVATIVO</th>
+            <th>ESTADO</th>
+            <th>DATA</th>
+            <th>ACÇÃO</th>
+        </tr>
+
+    </thead>
+    <tbody id="corpo_institucional">
+        <!-- for $this->category -->
+        <?php foreach ($this->clienteData->data->data ?? [] as  $value) { ?>
+            <tr>
+                <td><?= $value->name ?? '' ?></td>
+                <td><?= $value->telefone ?? '' ?></td>
+                <td><?= $value->email ?? '' ?></td>
+                <td><?= $value->aumount_cart ?? 0 ?></td>
+                <td><a href=" <?= API_URL_LOGO . "storage/" . $value->comprovativo ?? '' ?>" target="__black">COMPROVATIVO</a></td>
+                <td><?= $value->status_action ? '<span class="text-danger">PENDENTE</span>' : '<span class="text-success">PROCESSADO</span>'  ?></td>
+                <td>
+                    <?= $value->created_at ?? 0 ?>
+                <td>
+                    <!-- <span class=" btn-danger btn-sm" id="delete<?= $value->id ?>" onclick="deletpacotes('<?= $value->id ?>','<?= $this->authCsrf ?>')"><i class="fas fa-trash"></i></span> -->
+                    ****
+                </td>
+            </tr>
+
+
+
+        <?php } ?>
+        <!-- end for -->
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>USER</th>
+            <th>TELEFONE</th>
+            <th>EMAIL</th>
+            <th>AKZ </th>
+            <th>COMPROVATIVO</th>
+            <th>ESTADO</th>
+            <th>DATA</th>
+            <th>ACÇÃO</th>
+        </tr>
+    </tfoot>
+</table>
+<div class="float-md-right align-content-center">
+    <nav aria-label="Page navigation example" class="">
+        <ul class="pagination">
+            <?php foreach ($this->clienteData->data->links ?? [] as  $value) {
+
+                $itemarray = explode('page=', $value->url ?? '');
+                //$item = explode('=', $itemarray[1] ?? '');
+            ?>
+                <li class="page-item <?= $value->active ? 'active' : '' ?>">
+                    <a class="page-link" href="#" onclick="getCarregamento('<?= $itemarray[1] ?? '' ?>')"><?= $value->label ?></a>
+                </li>
+            <?php } ?>
+
+
+        </ul>
+    </nav>
+</div>
+
+
+<input type="hidden" id="carrega_pendetes" value="<?= $this->clienteData->pendetes ?? 0 ?>">
+<input type="hidden" id="carrega_activados" value="<?= $this->clienteData->activados ?? '0' ?>">
+<input type="hidden" id="saldo_account_kz" value="<?= $this->clienteData->saldo_account  ?? 0 ?>">

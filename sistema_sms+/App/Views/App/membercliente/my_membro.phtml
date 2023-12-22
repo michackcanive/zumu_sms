@@ -1,0 +1,354 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <!-- inicio menu top -->
+    <?php include_once("menu_center.phtml"); ?>
+    <!-- /.navbar -->
+    <?php include_once("menu_lateral.phtml"); ?>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Membros</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+
+                            <li class="breadcrumb-item active">Membros</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
+                <?php include_once("cardsMembro.phtml"); ?>
+                <div class="row">
+                    <section class="col-lg-12 connectedSortable">
+                        <button type="button" class="btn btn-default bg-dark mb-2" data-toggle="modal" data-target="#modal-default">
+                            CRIAR NOVA MEMBRO
+                        </button>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+
+                                <tr>
+                                    <th>Nome do Menbro</th>
+                                    <th>Igreja Pertencente</th>
+                                    <th>Data</th>
+                                    <th>Acção</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <!-- for $this->category -->
+                                <?php foreach ($this->obreiros ?? [] as $value) { ?>
+                                    <tr>
+                                        <td><?= $value['nome_membro'] ?? '' ?></td>
+                                        <td> <?= $value['nome_igrejas'] ?? '' ?></td>
+                                        <td><?= $value['create_at'] ?? '' ?></td>
+                                        <td>
+                                            <span class="btn btn-block btn-dark btn-sm" id="delete<?= $value['id'] ?>" onclick="deletaobreiro('<?= $value['id'] ?>','<?= $this->authCsrf ?>')">deletar</span>
+                                            <button type="button" class="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#modal-default<?= $value['id'] ?? '' ?>">editar</button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+                                    <div class="modal fade" id="modal-default<?= $value['id'] ?>">
+                                        <div class="modal-dialog ">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">EDITAR MEMBRO </h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="card">
+                                                        <div class="card-body register-card-body">
+
+                                                            <div id="messagem"></div>
+
+                                                            <form method="post" accept="image/*" name="from_publicacao<?= $value['id'] ?>" class="mf_form_validate<?= $value['id'] ?> ajax_submit<?= $value['id'] ?>" enctype="multipart/form-data">
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 col-12">
+                                                                        <div class="input-group form-group">
+                                                                            <div class="col-lg-12 form-group">
+                                                                                <input type="text" name="nome_membro<?= $value['id'] ?>" id="nome_membro<?= $value['id'] ?>" value="<?= $value['nome_membro'] ?? '' ?>" class="form-control" placeholder="NOME DO MEMBRO ?">
+                                                                                <div class="input-group-append">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-lg-12 col-12">
+                                                                        <label>FOTO MEMBRO</label>
+                                                                        <div class="input-group form-group">
+                                                                            <div class="col-lg-12 form-group  ">
+                                                                                <input type="file" name="foto_membro<?= $value['id'] ?>" id="foto_membro<?= $value['id'] ?>" class="form-control" placeholder="FOATO DO MEMBRO ?">
+                                                                                <div class="input-group-append">
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12 col-12">
+                                                                        <div class="input-group form-group">
+                                                                            <div class="col-md-12 form-group">
+                                                                                <div class="form-group  ">
+                                                                                    <select class="form-control p-2 select2" style="width: 100%;" name="tipo_para_qual_igreja<?= $value['id'] ?>" id="tipo_para_qual_igreja<?= $value['id'] ?>">
+                                                                                        <option selected="selected" value="<?= $value['id_igrejas'] ?>"><?= $value['nome_igrejas'] ?></option>
+                                                                                        <?php foreach ($this->igrejas as $value1) { ?>
+                                                                                            <option value="<?= $value1['id'] ?>"><?= $value1['nome_igrejas'] ?></option>
+                                                                                        <?php } ?>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- /.col -->
+                                                                </div>
+
+                                                                <div class="row">
+
+                                                                    <div class="col-lg-12 col-12">
+                                                                        <div class="input-group mb-3 form-group">
+                                                                            <div class="col-lg-12 form-group">
+                                                                                <textarea type="text" name="descricao_membro<?= $value['id'] ?>" id="descricao_membro<?= $value['id'] ?>" rows="5" class="form-control" placeholder="BREVE DESCRIÇÃO DO OBREIRO ?"> <?= $value['descricao_membro'] ?></textarea>
+                                                                                <div class="input-group-text">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- /.col -->
+                                                                </div>
+
+                                                                <input type="hidden" name="token" id="token<?= $value['id'] ?>" class="form-control" value="<?= $this->authCsrf ?>">
+                                                                <div class="row">
+                                                                    <!-- /.col -->
+                                                                    <div class="col-4">
+                                                                        <button type="button" class="btn btn-primary btn-block" onclick="obreiroeditar(<?= $value['id'] ?>,<?= $value['id_igrejas'] ?>)" id="register<?= $value['id'] ?>">EDITAR</button>
+                                                                    </div>
+                                                                    <!-- /.col -->
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <!-- /.form-box -->
+                                                    </div><!-- /.card -->
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                <?php } ?>
+                                <!-- end for -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nome do Obreiro</th>
+                                    <th>Igreja Pertencente</th>
+                                    <th>Data</th>
+                                    <th>Acção</th>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">CRIAR NOVA MEMBRO </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body register-card-body">
+
+                                <div id="messagem"></div>
+
+                                <form method="post" accept="image/*" name="from_publicacao" class="mf_form_validate ajax_submit" action="/creteObreiros" enctype="multipart/form-data">
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12">
+                                            <label>NOME DO MEMBRO</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-lg-12 form-group">
+                                                    <input type="text" name="nome_membro" id="nome_membro" class="form-control" placeholder="NOME DO MEMBRO ?">
+                                                    <div class="input-group-append">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-12">
+                                            <label>EMAIL DO MEMBRO</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-lg-12 form-group">
+                                                    <input type="email" name="email_membro" id="email_membro" class="form-control" placeholder="NOME DO MEMBRO ?">
+                                                    <div class="input-group-append">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <label>SENHA DE ACESSO</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-lg-12 form-group">
+                                                    <input type="text" name="senha_membro" id="senha_membro" class="form-control" placeholder="SENHA DE ACESSO ?">
+                                                    <div class="input-group-append">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <label>FOTO MEMBRO</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-lg-12 form-group  ">
+                                                    <input type="file" name="foto_membro" id="nome_membro" class="form-control" placeholder="FOTO DO MEMBRO ?">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <label>Para qual igreja ?</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-md-12 form-group">
+
+                                                    <select class="form-control p-2 select2" style="width: 100%;" name="tipo_para_qual_igreja" id="tipo_para_qual_igreja">
+                                                        <option selected="selected" value="">Para qual igreja ?</option>
+                                                        <?php foreach ($this->igrejas as $value) { ?>
+                                                            <option value="<?= $value['id'] ?>"><?= $value['nome_igrejas'] ?></option>
+                                                        <?php } ?>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <label>IDADE</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-lg-12 form-group">
+                                                    <input type="number" name="idade_membro" id="idade_membro" class="form-control" placeholder="NOME DO OBREIRO ?">
+                                                    <div class="input-group-append">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <label>GENÉRO</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-lg-12 form-group">
+                                                    <select class="form-control p-2 " style="width: 100%;" name="genero_membro" id="genero_membro">
+                                                        <option selected="selected" value="">SELECIONE O GENÉRO</option>
+                                                        <option value="1">MASCULINO</option>
+                                                        <option value="0">FEMENINO</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <label>ESTADO DE BAPTIMO</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-lg-12 form-group">
+                                                    <select class="form-control p-2 " style="width: 100%;" name="genero_membro" id="genero_membro">
+                                                        <option selected="selected" value="">ESTADO DO BAPTIMO</option>
+                                                        <option value="1" class="text-success">SIM</option>
+                                                        <option value="0" class=" text-danger">NÃO</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-12">
+                                            <label>ESTADO DE VIDA</label>
+                                            <div class="input-group form-group">
+                                                <div class="col-lg-12 form-group">
+                                                    <select class="form-control p-2 " style="width: 100%;" name="estado_de_vida" id="estado_de_vida">
+                                                        <option selected="selected" value="">SELECIONE O ESTADO DE VIDA</option>
+                                                        <option value="1" class="text-success">EM VIDA</option>
+                                                        <option value="0" class=" text-danger">FALECIDO</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-12 col-12">
+                                            <div class="input-group mb-3 form-group">
+                                                <div class="col-lg-12 form-group">
+                                                    <textarea type="text" name="descricao_membro" id="descricao_membro" rows="5" class="form-control" placeholder="BREVE DESCRIÇÃO DO OBREIRO ?"></textarea>
+                                                    <div class="input-group-text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+
+                                    <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
+                                    <div class="row">
+                                        <!-- /.col -->
+                                        <div class="col-4">
+                                            <button type="submit" class="btn btn-primary btn-block" id="register">CRIAR</button>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.form-box -->
+                        </div><!-- /.card -->
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+    </div>
+    <footer class="main-footer">
+        © zumu_sms.
+        <a href="https://zumu_sms.com">zumu_sms</a>.- Desenvolvido pela <a href="https://qlerius.com" class="text-dark">Qlerius</a> </strong>
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 3.2.0
+        </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->

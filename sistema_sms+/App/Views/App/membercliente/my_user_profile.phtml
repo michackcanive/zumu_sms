@@ -1,0 +1,155 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <!-- inicio menu top -->
+    <?php include_once("menu_center.phtml"); ?>
+    <!-- /.navbar -->
+    <?php include_once("menu_lateral.phtml"); ?>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">User</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+
+                            <li class="breadcrumb-item active">Definição</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <!-- Profile Image -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle" src="dist/icons/perfil.png" alt="User profile picture">
+                                </div>
+
+                                <h3 class="profile-username text-center"><?= $_SESSION['nameUser']?></h3>
+
+                                <p class="text-muted text-center">Usuário</p>
+
+                                <!-- <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b>Followers</b> <a class="float-right">1,322</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Following</b> <a class="float-right">543</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Friends</b> <a class="float-right">13,287</a>
+                                    </li>
+                                </ul> -->
+
+                                <a href="/" class="btn btn-primary btn-block"><b>Inicio</b></a>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item" disabled><a class="nav-link active" href="#settings" data-toggle="tab" disabled>Dados da conta</a></li>
+                                    <li class="nav-item" disabled><a class="nav-link" href="#senha1" data-toggle="tab" disabled>Alterar Senha</a></li>
+                                </ul>
+                            </div><!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="settings">
+                                        <form class="form-horizontal" name="from_update-user" id="update-user">
+                                            <input type="hidden" class="form-control" id="token" name="token" value="<?= $this->authCsrf ?>">
+                                            <div class="form-group row">
+                                                <label for="inputName" class="col-sm-2 col-form-label">Nome </label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="user_name" name="user_name" value="<?= $_SESSION['nameUser']?>" placeholder="Name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                                <div class="col-sm-10">
+                                                    <input type="email" class="form-control" id="inputEmail" value="<?= $_SESSION['emailUser'] ?>" placeholder="Email" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputName2" class="col-sm-2 col-form-label">Senha Actual</label>
+                                                <div class="col-sm-10">
+                                                    <input type="password" class="form-control" id="senha_user" name="senha_user" placeholder="Senha Actual">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-danger" id="btn-update_user" disabled>breve</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="tab-pane" id="senha">
+                                        <form class="form-horizontal" name="from_update-senha-user" id="update-user-senha">
+                                        <input type="hidden" class="form-control" id="token" name="token"  value="<?= $this->authCsrf?>">
+                                            <div class="form-group row">
+                                                <label for="inputName" class="col-sm-2 col-form-label">Senha Actual</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" id="senha_actual" name="senha_actual" placeholder="Senha Actual">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail" class="col-sm-2 col-form-label">Senha Nova</label>
+                                                <div class="col-sm-10">
+                                                    <input type="password" class="form-control" id="senha_nova" name="senha_nova" placeholder="Senha Nova">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputName2" class="col-sm-2 col-form-label">Confirmação da Senha</label>
+                                                <div class="col-sm-10">
+                                                    <input type="password" class="form-control" id="senha_confirmacao" name="senha_confirmacao" placeholder="Confirmação da Senha">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-danger" id="btn-update_user-senha">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                </div>
+                                <!-- /.tab-content -->
+                            </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+    </div>
+    <?php include_once("footer_info.phtml"); ?>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->

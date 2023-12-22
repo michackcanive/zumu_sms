@@ -1,0 +1,120 @@
+<div class="login-box">
+
+    <div class="login-logo">
+        <div class="image">
+            <img src="<?= API_URL_LOGO . "" . $_SESSION['LOGO_SISTEMA'] ?? '' ?>" alt="<?= $this->configuracao->dataEmpresa->nome_sistema ?? 'Sem conexão / olá serviços' ?>" class="brand-image img-circle " width="100" style="opacity: .8">
+        </div>
+        <a href="/" class="text-white"><b> <?= $this->configuracao->dataEmpresa->nome_sistema ?? '' ?></b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <div class="lockscreen-name text-center font-weight-600 ">
+                <h5>
+                    <?= $_COOKIE['telefone_cook'] ?? '' ?>
+                </h5>
+
+            </div>
+            <p class="login-box-msg">Activar sua Conta (Gestor: <?= $_SESSION['nameUser'] ?? '' ?>) </p>
+            <!-- User name -->
+
+            <div id="messagem"></div>
+
+            <form method="post" id="quickFormConfimar" onsubmit="return false" class="align-items-center">
+                <div class=" mb-3 form-group col-12 text-center">
+                    <input type="number" name="codigo" maxlength="4" id="codeConfimar" class="form-control text-center" placeholder="X X X X">
+                </div>
+                <div class="input-group mb-2 form-group" id="errocodigo">
+
+                </div>
+
+                <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block" id="btn_confimar">Confirmar</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+            <small class=" <?= $_SESSION['is_send_code'] ? 'text-success' : 'text-danger' ?> "><?= $_SESSION['is_send_code'] ? 'Verifica a sua caixa de Mensagem' : 'Não foi possível enviar o código' ?></small>
+
+
+            <div class="social-auth-links text-center mb-3">
+                <!--         <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i> Entrar com Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i> Entrar com Google
+        </a> -->
+                <p class="mb-1">
+                    <a  href="#" id="btn_renviar_confimar"  onclick="renviarcodigo()" >renviar código</a>
+                </p>
+            </div>
+            <!-- /.social-auth-links -->
+
+            <p class="mb-1">
+                <a href="#" data-toggle="modal" data-target="#modal-termos">termos e condições</a>
+            </p>
+            <p class="mb-0">
+                <a href="/logout" class="text-center">terminar</a>
+            </p>
+        </div>
+        <!-- /.login-card-body -->
+        <div class="modal fade" id="modal-termos">
+
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content ">
+        <div class="modal-header">
+            <h4 class="modal-title">Termos de serviço.</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body animate__animated animate__bounceIn">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12 animate__animated animate__slideInLeft">
+                    <!-- jquery validation -->
+                    <div class="card card-primary">
+
+                        <form method="post" accept="image/*" name="from_membro" class="mf_form_validate_contacto ajax_submit_contacto" action="/createContacto" enctype="multipart/form-data">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <p class="text-danger">Aceito todos os termos aplicado ao serviços</p>
+                                    <p>O processo de alteração de telemovel ou email tem custos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+
+            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>
+
+    </div>
+</div>
+
+<script>
+    if (!!(window.addEventListener)) window.addEventListener('DOMContentLoaded', main);
+    else window.attachEvent('onload', main);
+
+    function main() {
+        setTimeout(function () { ''; }, 5000);
+
+    }
+</script>

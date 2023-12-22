@@ -1,0 +1,158 @@
+<div class="container-md">
+    <a href="/" class="btn btn-info"><i class="fas fa-arrow-circle-left"></i></a>
+</div>
+
+<div class="register-box">
+    <div class="register-logo">
+        <div class="image">
+            <img src="<?= API_URL_LOGO . "" . $_SESSION['LOGO_SISTEMA'] ?? '' ?>" alt="<?= $this->configuracao->dataEmpresa->nome_sistema ?? '' ?>" class="brand-image img-circle " width="100" style="opacity: .8">
+        </div>
+        <a href="/" class="text-white"><b><?= $_SESSION['NOME_SISTEMA'] ?? '' ?></b></a>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Criar Conta</p>
+            <div id="messagem"></div>
+
+            <form method="post" id="quickForm" onsubmit="return false">
+
+                <div class="input-group mb-3 form-group">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Nome completo">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-2 form-group" id="erroname">
+
+                </div>
+
+                <div class="input-group mb-3 form-group">
+
+                    <div class="form-control" style="width: 10px !important;">
+                        <span>
+                            +244
+                        </span>
+                    </div>
+
+                    <input type="text" name="telefone" maxlength="9" id="telefone" class="form-control" placeholder="9XX XXX XXX">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-phone"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-2 form-group" id="errotelefone">
+
+                </div>
+
+
+                <div class="input-group mb-3 form-group">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-2 form-group" id="erroemail">
+
+                </div>
+
+                <input type="hidden" name="token" id="token" class="form-control" value="<?= $this->authCsrf ?>">
+
+                <div class="input-group mb-3 form-group">
+
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="input-group mb-2 form-group" id="erropassword">
+
+                </div>
+
+                <div class="row">
+                    <div class="form-group mb-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
+                            <label class="custom-control-label" for="exampleCheck1">Eu aceito <a href="#" data-toggle="modal" data-target="#modal-termos">termos de serviço.</a>.</label>
+                        </div>
+                    </div>
+
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block" id="register">Registrar</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <div class="social-auth-links text-center">
+
+                <!--  <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i>
+                    Registrar com Facebook
+                </a> -->
+                <!-- <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i>
+                    Registrar com Google+
+                </a> -->
+            </div>
+            <div class="modal fade" id="modal-termos">
+
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Termos de serviço.</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body animate__animated animate__bounceIn">
+                            <div class="row">
+                                <!-- left column -->
+                                <div class="col-md-12 animate__animated animate__slideInLeft">
+                                    <!-- jquery validation -->
+                                    <div class="card card-primary">
+
+                                        <form method="post" accept="image/*" name="from_membro" class="mf_form_validate_contacto ajax_submit_contacto" action="/createContacto" enctype="multipart/form-data">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                    <p class="text-danger">Aceito todos os termos aplicado ao serviços</p>
+                                                    <p>O processo de alteração de telemovel ou email tem custos</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>
+
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+
+            <a href="/login" class="text-center">Já tenho conta</a>
+        </div>
+        <!-- /.form-box -->
+    </div><!-- /.card -->
+</div>
